@@ -24,7 +24,6 @@ def index():
 #-----------------------------------------------------------------------
 
 @app.route('/profile')
-@login_required
 def library():
     print(username)
     print(display_name)
