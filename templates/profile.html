@@ -3,19 +3,35 @@
 {% block body %}
   <div class="container">
     <div class="row mt-4">
-      <header class="h1">
+      <header class="h3">
         My templates
       </header>
     </div>
     <div class="row">
-      <div class="col-sm-4">
-        <div class="card">
+      <div class="col-sm-12">
+        <!-- <div class="card">
           <div class="card-body">
             <h5 class="card-title">COS217: Buffer Overrun</h5>
             <p class="card-text"></p>
             <a href="/edittemplate" class="btn btn-primary">Edit Template</a>
           </div>
+        </div> -->
+        <div class="card-deck">
+          {% for instance in allInstances: %}
+                <div class="card" style="width: 18rem;">
+                      <div class="card-body">
+                          <form method="post" action="/handleinstance">
+                            <h5 class="card-title" method="get" instance_id={{instance.instance_id}}><a href="{{url_for('edittemplate', instance_id=instance_id)}}">{{instance.template.name}}</a></h5>
+                            <!-- <h6 class="card-subtitle mb-2 text-muted">COS 217</h6> -->
+                            <!-- <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p> -->
+                            <button action="submit" name="edit" value={{instance.instance_id}} class="btn btn-primary">Edit</a></button>
+                            <button action="submit" name="delete" value={{instance.instance_id}} class="btn btn-danger">Delete</a></button>
+                          </form>
+                      </div>
+                </div>
+          {% endfor %}
         </div>
+
       </div>
       <!-- <div class="col-sm-4">
         <div class="card">
@@ -35,6 +51,36 @@
           </div>
         </div>
       </div> -->
+    </div>
+    <div class="row mt-4">
+      <div class="col col-md-6">
+        <header class="h3">Requests Awaiting Your Response</header>
+        {% for req in awaitingRequests %}
+          <form method="post" action="/handleAwaitingRequest">
+            <div class="card">
+              <div class="card-body">
+                Request From: {{req.sender_id}}
+                <button class="btn btn-primary" name="accept" value="{{req.request_id}}" action="submit">Accept</button><button class="btn btn-danger" name="refuse" value="{{req.request_id}}" action="submit">Delete</button>
+              </div>
+            </div>
+          </form>
+        {% endfor %}
+      </div>
+      <div class="col col-md-6">
+        <header class="h3">Requests You've Sent</header>
+        {% for req in sentRequests %}
+          <form method="post" action="/cancelRequest">
+            <div class="card">
+              <div class="card-body">
+                Sent To: {{req.receiver_id}}
+              </div>
+              <div class="card-footer">
+                <button class="btn btn-danger" name="cancel" value="{{req.request_id}}" action="submit">Cancel</button>
+              </div>
+            </div>
+          </form>
+          {% endfor %}
+      </div>
     </div>
     <!-- <div class="row mt-4">
       <div class="col-sm-4">

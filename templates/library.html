@@ -1,19 +1,41 @@
 {% extends "base.html" %}
 {% block body %}
 <div class="container">
+    {% if error %}
+        <div class="row mt-4">
+            <div class="col col-md-12">
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <strong>Error:</strong> You already own this template.
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                </div>
+            </div>
+        </div>
+    {% endif %}
     <div class="row mt-4">
         <div class="h1">All Templates</div>
     </div>
-    <div class="row">
-        <div class="card" style="width: 18rem;">
+    <!-- <div class="row"> -->
+    
+    <div class="card-deck">
+        {% for template in templates %}
+        <form method="post" action="/addtemplate">
+            <div class="card h-100" style="width: 20rem;">
                 <!-- <img class="card-img-top" src="..." alt="Card image cap"> -->
                 <div class="card-body">
-                  <h5 class="card-title">COS 217: Buffer Overrun</h5>
-                  <!-- <p class="card-text"></p> -->
-                  <a href="/addtemplate" class="btn btn-primary">Add</a>
+                    <h5 class="card-title">{{template.name}}</h5>
+                    <!-- <p class="card-text"></p> -->
                 </div>
-        </div>
+                <div class="card-footer">
+                        <button class="btn btn-primary" action="submit" name="template_id" value={{template.temp_id}}>Add</button>
+                </div>
+            </div>
+        </form>
+        {% endfor %}
     </div>
+    
+    <!-- </div> -->
 </div>
 
 {% endblock %}

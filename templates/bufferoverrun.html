@@ -111,10 +111,17 @@
                <div class="col col-md-12">
                     <div class="h4">Partner Setup</div>
                     <div class="form">
-                        <label class="font-weight-bold mt-2">Partner: None</label>
+                        <label class="font-weight-bold mt-2">Partner: {{partner}}</label>
                         <br>
                         <label class="mt-2">Add Partner</label> 
-                        <input class="form-control" type="text" placeholder="Search" aria-label="Search">
+                        <form action='/addpartner' method='post'>
+                          <div class="input-group mb-3">
+                              <input name="netid" type="text" class="form-control" placeholder="Partner's netid" aria-label="Partner's netid" aria-describedby="basic-addon2">
+                              <div class="input-group-append">
+                                <button class="btn btn-outline-secondary" name="instance_id" value="{{instance.instance_id}}" action="submit">Add</button>
+                              </div>
+                          </div>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -154,45 +161,68 @@
                     <p>It's fine to do a web search to complete Step 1 of the assignment.</p>
               </div>
               <div class="col col-md-6">
-                <div class="row">
-                    <div class="todolist not-done">
-                                 <div class="h4">To-do</div>
-                                    <!-- <input type="text" class="form-control add-todo" placeholder="Add todo"> -->
-                                        <button id="checkAll" class="btn btn-success">Mark all as done</button>
-                                        
-                                        <hr>
-                                        <ul id="sortable" class="list-unstyled">
-                                        <li class="ui-state-default">
-                                            <div class="checkbox">
-                                                <label>
-                                                    <input type="checkbox" value="" />Google "18 U.S. Code 1030"</label>
-                                            </div>
-                                        </li>
-                                        <li class="ui-state-default">
-                                            <div class="checkbox">
-                                                <label>
-                                                    <input type="checkbox" value="" />Fill in first blank in readme</label>
-                                            </div>
-                                        </li>
-                                        <li class="ui-state-default">
-                                            <div class="checkbox">
-                                                <label>
-                                                    <input type="checkbox" value="" />Fill in second blank in readme</label>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                    <div class="todo-footer">
-                                        <strong><span class="count-todos"></span></strong> Items Left
-                                    </div>
-                    </div>
-                    <div class="todolist">
-                            <div class="h4">Already Done</div>
-                            <ul id="done-items" class="list-unstyled">
-                                            <!-- <li>Some item <button class="remove-item btn btn-default btn-xs pull-right"><span class="glyphicon glyphicon-remove"></span></button></li> -->
-                             </ul>
-                    </div>
-                </div>
-                                                    
+                  <table class="table">
+                      <thead>
+                        <tr>
+                          <th scope="col">Complete?</th>
+                          <th scope="col">Task</th>
+                          <th scope="col">Assigned to</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <th scope="row">
+                              <div class="form-check">
+                                  <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                                </div>
+                          </th>
+                          <td>Google "18 U.S. Code 1030"</td>
+                          <td>
+                              <select class="custom-select">
+                                  <option selected>Assign to</option>
+                                  <option value="{{instance.owner_id}}">{{instance.owner_id}}</option>
+                                  {% if instance.partner_id %}                                    
+                                      <option value="{{instance.partner_id}}">{{instance.partner_id}}</option>
+                                  {% endif %}
+                                </select>
+                          </td>
+                        </tr>
+                        <tr>
+                          <th scope="row">
+                              <div class="form-check">
+                                  <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                                </div>
+                          </th>
+                          <td>Fill in second blank in readme</td>
+                          <td>
+                              <select class="custom-select">
+                                <option selected>Assign to</option>
+                                <option value="{{instance.owner_id}}">{{instance.owner_id}}</option>
+                                {% if instance.partner_id %}                                    
+                                    <option value="{{instance.partner_id}}">{{instance.partner_id}}</option>
+                                {% endif %}
+                              </select>
+                          </td>
+                        </tr>
+                        <tr>
+                          <th scope="row">
+                              <div class="form-check">
+                                  <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                                </div>
+                          </th>
+                          <td>Fill in first blank in readme</td>
+                          <td>
+                              <select class="custom-select">
+                                  <option selected>Assign to</option>
+                                  <option value="{{instance.owner_id}}">{{instance.owner_id}}</option>
+                                  {% if instance.partner_id %}                                    
+                                      <option value="{{instance.partner_id}}">{{instance.partner_id}}</option>
+                                  {% endif %}
+                              </select>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>                                   
               </div>
           </div>
           <!-- <a class="btn btn-default prev" href="#">Previous</a>

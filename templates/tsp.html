@@ -1,0 +1,309 @@
+{% extends 'base.html' %}
+{% block extracss %}
+<link href="/../static/css/todo.css" rel="stylesheet">
+{% endblock %}
+{% block body %}
+<div class="container" id="myWizard">
+  
+    <h3 class="mt-4">COS 126: Travelling Salesperson</h3>
+   
+    <hr>
+   
+    <div class="progress">
+      <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="7" style="width: 0%;">
+        Step 0 of 7
+      </div>
+    </div>
+   
+    <div class="navbar mt-2">
+       <div class="navbar-inner">
+             <ul class="nav nav-pills">
+                <li class="active"><a class="nav-link active" href="#step0" data-toggle="tab" data-step="0">Context</a></li>
+                <li class="nav-item"><a class="nav-link" href="#step1" data-toggle="tab" data-step="0">Setup</a></li>
+                <li class="nav-item"><a class="nav-link" href="#step2" data-toggle="tab" data-step="1">Step 1</a></li>
+                <li class="nav-item"><a class="nav-link" href="#step3" data-toggle="tab" data-step="2">Step 2</a></li>
+                <li class="nav-item"><a class="nav-link" href="#step4" data-toggle="tab" data-step="3">Step 3</a></li>
+                <li class="nav-item"><a class="nav-link" href="#step5" data-toggle="tab" data-step="4">Step 4</a></li>
+                <li class="nav-item"><a class="nav-link" href="#step6" data-toggle="tab" data-step="5">Step 5</a></li>
+                <li class="nav-item"><a class="nav-link" href="#step7" data-toggle="tab" data-step="6">Step 6</a></li>
+                <li class="nav-item"><a class="nav-link" href="#step8" data-toggle="tab" data-step="7">Wrapping Up</a></li>
+             </ul>
+       </div>
+    </div>
+    <div class="tab-content mt-4">
+       <div class="tab-pane fade show active" id="step0">
+            <div class="row">
+                    <div class="col col-md-6">
+                            <div class="h4">Goal</div>
+                            <p>Given n points in the plane, the goal of a traveling salesperson is to visit all of them and return to the starting point, while keeping the total length traveled as short as possible. Implement two greedy heuristics to find good, but not optimal, solutions to the traveling salesperson problem.</p>
+                    </div>
+                    <div class="col col-md-6">
+                            <div class="h4">Overview</div>
+                            <ul>
+                                <li>Number of Steps: 6</li>
+                                <li>Step 1: 2%</li>
+                                <li>Step 2: 37%</li>
+                                <li>Step 3: 12%</li>
+                                <li>Step 4: 15%</li>
+                                <li>Step 5: 24%</li>
+                                <li>Step 6: 10%</li>
+                            </ul>
+                    </div>
+               </div>
+           <div class="row align-items-start mb-4">
+                <div class="col col-md-12">
+                    <div class="h4">Background</div>
+                    <p><b>Context: </b>The importance of the TSP does not arise from an overwhelming demand of salespeople to minimize their travel length, but rather from a wealth of other applications such as vehicle routing, circuit board drilling, VLSI design, robot control, X-ray crystallography, machine scheduling, and computational biology.</p>
+                    <p>The TSP is a notoriously difficult combinatorial optimization problem. In principle, you can enumerate all possible tours and pick the shortest one; in practice, the number of tours is so staggeringly large (nearly n factorial) that this approach is useless. For large n, no one knows of an efficient method that can find the shortest possible tour for any given set of points. However, many methods have been studied that seem to work well in practice, even though they do not guarantee to produce the best possible tour. Such methods are called heuristics.</p>
+                </div>
+           </div>
+
+           <div class="row">
+               <div class="col col-md-12">
+                   <div class="h4">Task</div>
+                   <p>Your main task is to implement the <strong>nearest neighbor</strong> and <strong>smallest increase</strong> insertion heuristics for building a tour incrementally, one point at a time. Start with a one-point tour (from the first point back to itself), and iterate the following process until there are no points left:</p>
+                    <ul>
+                        <li><em>Nearest neighbor heuristic:</em>&nbsp; Read in the next point, and add it to the current tour <em>after</em> the point to which it is closest. (If there is more than one point to which it is closest, insert it after the first such point you discover.)</li>
+                        <li><em>Smallest increase heuristic:</em>&nbsp; Read in the next point, and add it to the current tour <em>after</em> the point where it results in the least possible increase in the tour length. (If there is more than one point, insert it after the first such point you discover.</li>
+                    </ul>
+               </div>
+           </div>
+          <!-- <a class="btn btn-default btn-lg next" href="#">Continue</a> -->
+       </div>
+       <div class="tab-pane fade" id="step1">
+           <div class="row">
+               <div class="col col-md-12">
+                    <div class="h4">Partner Setup</div>
+                    <div class="form">
+                        <label class="font-weight-bold mt-2">Partner: None</label>
+                        <br>
+                        <label class="mt-2">Add Partner</label> 
+                        <input class="form-control" type="text" placeholder="Search" aria-label="Search">
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-4">
+                    <div class="col col-md-12">
+                        <div class="h4">Procedure</div>
+                        <p>Download the following Point API. <b>Do not implement it.</b></p>
+                        <pre>
+                                public class <b>Point</b> {
+                                    public        <b>Point(double x, double y)</b>  <span class="comment">// creates the point (x, y)</span>
+                                    public double <b>distanceTo(Point that)</b>     <span class="comment">// returns the Euclidean distance between the two points</span>
+                                    public   void <b>draw()</b>                     <span class="comment">// draws this point to standard drawing</span>
+                                    public   void <b>drawTo(Point that)</b>         <span class="comment">// draws the line segment between the two points</span>
+                                    public String <b>toString()</b>                 <span class="comment">// returns a string representation of this point</span>
+                                }
+                        </pre>                        
+                    </div>               
+            </div>
+       </div>
+       <div class="tab-pane fade" id="step2">
+          <div class="row">
+              <div class="col col-md-6">
+                  <div class="h4">Instructions</div>
+                    <p>Implement Tour.java. Note that Tour.java uses the following Node class.</p>
+                    <pre>
+                            private class <b>Node</b> {
+                                private Point <b>p</b>;
+                                private Node  <b>next</b>;
+                            }
+                    </pre>
+                    <pre>
+                            public class <b>Tour</b> {
+                                public        <b>Tour</b>()                                    <span class="comment">// creates an empty tour</span>
+                                public        <b>Tour</b>(Point a, Point b, Point c, Point d)  <span class="comment">// creates the 4-point tour a->b->c->d->a (for debugging)</span>
+                                public    int <b>size</b>()                                    <span class="comment">// returns the number of points in this tour</span>
+                                public double <b>length</b>()                                  <span class="comment">// returns the length of this tour</span>
+                                public String <b>toString</b>()                                <span class="comment">// returns a string representation of this tour</span>
+                                public   void <b>draw</b>()                                    <span class="comment">// draws this tour to standard drawing</span>
+                                public   void <b>insertNearest</b>(Point p)                    <span class="comment">// inserts p using the nearest neighbor heuristic</span>
+                                public   void <b>insertSmallest</b>(Point p)                   <span class="comment">// inserts p using the smallest increase heuristic</span>
+                            
+                                <span class="comment">// tests this class by directly calling all constructors and instance methods</span>
+                                public static void <b>main</b>(String[] args)
+                            <b>}</b>
+                    </pre>
+              </div>
+              <div class="col col-md-6">
+                <div class="row">
+                    <div class="todolist not-done">
+                                 <div class="h4">To-do</div>
+                                    <!-- <input type="text" class="form-control add-todo" placeholder="Add todo"> -->
+                                        <button id="checkAll" class="btn btn-success">Mark all as done</button>
+                                        
+                                        <hr>
+                                        <ul id="sortable" class="list-unstyled">
+                                        <li class="ui-state-default">
+                                            <div class="checkbox">
+                                                <label>
+                                                    <input type="checkbox" value="" />Google "18 U.S. Code 1030"</label>
+                                            </div>
+                                        </li>
+                                        <li class="ui-state-default">
+                                            <div class="checkbox">
+                                                <label>
+                                                    <input type="checkbox" value="" />Fill in first blank in readme</label>
+                                            </div>
+                                        </li>
+                                        <li class="ui-state-default">
+                                            <div class="checkbox">
+                                                <label>
+                                                    <input type="checkbox" value="" />Fill in second blank in readme</label>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                    <div class="todo-footer">
+                                        <strong><span class="count-todos"></span></strong> Items Left
+                                    </div>
+                    </div>
+                    <div class="todolist">
+                            <div class="h4">Already Done</div>
+                            <ul id="done-items" class="list-unstyled">
+                                            <!-- <li>Some item <button class="remove-item btn btn-default btn-xs pull-right"><span class="glyphicon glyphicon-remove"></span></button></li> -->
+                             </ul>
+                    </div>
+                </div>
+                                                    
+              </div>
+          </div>
+          <!-- <a class="btn btn-default prev" href="#">Previous</a>
+          <a class="btn btn-default next" href="#">Continue</a> -->
+       </div>
+       <div class="tab-pane fade" id="step3">
+            <div class="row">
+                    <div class="col col-md-12">
+                        <div class="h4">Instructions</div>                            
+                    </div>
+            </div>
+         </div>
+       </div>
+       <div class="tab-pane fade" id="step5">
+         <div class="row">
+             <div class="col col-md-12">
+                 <div class="h4">Instructions</div>
+                    <p>The given <code>miniassembler.h</code> interface file declares four functions that generate machine language instructions. Comments in the file describe the functions. The given <code>miniassembler.c</code> implementation file defines one of those functions. Define the other three, thus completing the <code>miniassembler.c</code> implementation file.</p>
+
+                    <p>The given <code>testminiassembler.c</code> file tests the <code>MiniAssembler</code> module. Use the MiniAssembler module and <code>testminiassembler.c</code> to build a program named <code>miniassembler</code>. Run the program, and compare its output to the given <code>testminiassembler.out</code> file to make sure the function definitions in your MiniAssembler module are correct.</p>
+             </div>
+         </div>
+       </div>
+        <div class="tab-pane fade" id="step6">
+         <div class="row">
+             <div class="col-md-12">
+                    <div class="h4">Instructions</div>
+                    <p>Compose a C program named <code>createdataA.c</code> that produces a file named <code>dataA</code>, as short and simple as possible, that causes the <code>grader</code> program to write your name and recommend a grade of "A". To receive full credit the <code>dataA</code> file must cause the <code>grader</code> program to generate output whose format is indistinguishable from normal output. Your program must call the four functions that are declared in <code>miniassembler.h</code>.<p>
+
+                            <p>The <code>createdataA.c</code> program must write to the <code>dataA</code> file; it must not write to <code>stdout</code>.</p>
+                            
+                            <p>Your <code>createdataA.c</code> file must contain these comments:</p>
+                            
+                            <ul>
+                            <li><p>A <em>file</em> comment, that is, a comment at the beginning of the file providing the file name, your name, and your teammate's name.</p></li>
+                            
+                            <li><p>A <em>function</em> comment describing the "I/O behavior" of the <code>main</code> function. That is, the function comment must describe what the <code>main</code> function accepts as command-line arguments, reads from <code>stdin</code> or any other stream, writes to <code>stdout</code>, <code>stderr</code>, or any other stream, and returns.</p></li>
+                            
+                            <!--
+                            <li><p>A <em>principles of operation</em> comment that describes how the <code>dataA</code> file causes the <code>grader</code> program to recommend the grade "A".</p></li>
+                            -->
+                            
+                            <li><p><em>Local</em> comments, that is, comments throughout your program that thoroughly describe the bytes that the program writes to the <code>dataA</code> file.</p></li>
+                            </ul>
+                            
+                            <blockquote>
+                            <div style="padding:10px;border:5px solid green;">It is acceptable to use "magic numbers" throughout your <code>createdataA.c</code> file.
+                            </div>
+                            </blockquote>
+                            
+                            <blockquote>
+                            <div style="padding:10px;border:5px solid green;">
+                            For the "A" attack it's OK to truncate your name(s) if necessary.
+                            </div>
+                            </blockquote>
+                            
+                            <blockquote>
+                            <div style="padding:10px;border:5px solid green;">Suggestion: After creating your <code>dataA</code> file, issue the command <code>xxd dataA</code> to confirm that the file contains exactly the bytes that you want it to contain.
+                            </div>
+                            </blockquote>
+             </div>
+         </div>
+       </div>
+       <div class="tab-pane fade" id="step7">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="h4">Instructions</div>
+                    <p>Compose a C program named <code>createdataAplus.c</code> that produces a file named <code>dataAplus</code>, as short and simple as possible, that causes the <code>grader</code> program to write your name and recommend a grade of "A+". To receive credit the <code>dataAplus</code> file must cause the <code>grader</code> program to generate output whose format is indistinguishable from normal output. </p>
+
+                    <p>The <code>createdataAplus.c</code> program must write to the <code>dataAplus</code> file; it must not write to <code>stdout</code>.</p>
+
+                    <p>Your <code>createdataAplus.c</code> file must contain:</p>
+
+                    <ul>
+                    <li><p>A <em>file</em> comment, that is, a comment at the beginning of the file providing the file name, your name, and your teammate's name.</p></li>
+
+                    <li><p>A <em>function</em> comment describing the "I/O behavior" of the <code>main</code> function. That is, the function comment must describe what the <code>main</code> function accepts as command-line arguments, reads from <code>stdin</code> or any other stream, writes to <code>stdout</code>, <code>stderr</code>, or any other stream, and returns.</p></li>
+
+                    <!--
+                    <li><p>A <em>principles of operation</em> comment that describes how the <code>dataAplus</code> file causes the <code>grader</code> program to recommend the grade "A+".</p></li>
+                    -->
+
+                    <li><p><em>Local</em> comments, that is, comments throughout your program that thoroughly describe the bytes that the program writes to the <code>dataAplus</code> file.</p></li>
+                    </ul>
+
+                    <blockquote>
+                    <div style="padding:10px;border:5px solid green;">It is acceptable to use "magic numbers" throughout your <code>createdataAplus.c</code> file.
+                    </div>
+                    </blockquote>
+
+                    <blockquote>
+                    <div style="padding:10px;border:5px solid green;">
+                    For the "A+" attack it's OK to truncate your name(s) if necessary.
+                    </div>
+                    </blockquote>
+
+                    <blockquote>
+                    <div style="padding:10px;border:5px solid green;">
+                    For the "A+" attack it's OK to declare additional functions in the <code>miniassembler.h</code> file and define additional functions in the <code>miniassembler.c</code> file.
+                    </div>
+                    </blockquote>  
+                </div>
+            </div>
+        </div>
+        <div class="tab-pane fade" id="step8">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="h4">Instructions</div>
+                        <p>Edit your copy of the given <code>readme</code> file by answering each question that is expressed therein.</p>
+                        <p>One of the sections of the <code>readme</code> file requires you to list the authorized sources of information that you used to complete the assignment. Another section requires you to list the <em>unauthorized</em> sources of information that you used to complete the assignment. Your grader will not grade your submission unless you have completed those sections. To complete the "authorized sources" section of your <code>readme</code> file, copy the list of authorized sources given in the <em>Policies</em> web page to that section, and edit it as appropriate.</p>
+
+                        <p>Provide the instructors with your feedback on the assignment. To do that, issue this command:</p>
+
+                        <blockquote>
+                        <pre>
+                        FeedbackCOS217.py 5
+                        </pre>
+                        </blockquote>
+
+                        <p>and answer the questions that it asks. (When answering the numeric questions, please enter the average of the responses that you and your teammate would provide individually.) That command stores its questions and your answers in a file named <code>feedback</code> in your working directory.</p>
+
+                        <p>Submit your work electronically on armlab. If you worked with a teammate, then one of the teammates must submit all of your team's files, and the other teammate must submit none of your team's files. Your <code>readme</code> file, your <code>memorymap</code> file, and your source code files must contain both your name and your teammate's name. Use these commands to submit:</p>
+
+                        <blockquote>
+                        <pre>
+                        submit 5 createdataB.c 
+                        submit 5 miniassembler.h miniassembler.c
+                        submit 5 createdataA.c
+                        submit 5 createdataAplus.c
+                        submit 5 memorymap readme feedback
+                        </pre>
+                        </blockquote>
+                    </div>
+                </div>
+            </div>
+    </div>
+ </div>
+{% endblock %}
+{% block extrajs %}
+<script src="/../static/js/wizard.js"></script>
+<script src="/../static/js/todo.js"></script>
+{% endblock %}
