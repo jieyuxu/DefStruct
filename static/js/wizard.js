@@ -14,18 +14,30 @@ $('.prev').click(function(){
     
   })
   
-  $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+  // $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
     
-    //update progress
+  //   //update progress
+  //   var step = $(e.target).data('step');
+  //   console.log(step);
+  //   var percent = (parseInt(step) / 6) * 100;
+  //   console.log(e.attr('weight'));
+    
+  //   $('.progress-bar').css({width: percent + '%'});
+  //   $('.progress-bar').text("Step " + step + " of 7");
+    
+  //   //e.relatedTarget // previous tab
+    
+  // })
+  $('.nav li a').on('click', function(e){
+    console.log('activate');
     var step = $(e.target).data('step');
-    var percent = (parseInt(step) / 6) * 100;
+    // console.log(step);
+    var weight = $(this).attr('weight');
+    var steps = $(this).attr('num-steps');
+    $('.progress-bar').css({width: weight + '%'});
+    $('.progress-bar').text("Step " + step + " of " + steps + ": " + weight + "%");
     
-    $('.progress-bar').css({width: percent + '%'});
-    $('.progress-bar').text("Step " + step + " of 7");
-    
-    //e.relatedTarget // previous tab
-    
-  })
+  });
   
   $('.first').click(function(){
   
