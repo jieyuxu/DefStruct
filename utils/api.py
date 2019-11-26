@@ -1,9 +1,10 @@
 from utils.db import User, TempInstance, Template, Request
-from utils.base import Session, engine, Base
+from utils.base import session_factory, engine
 from datetime import datetime, timedelta
 from sqlalchemy import or_, and_
+from flask_sqlalchemy_session import current_session
 
-sess = Session()
+sess = current_session
 #------------------------------------------------------------------------------------------
 
 def getUser(net_id):
@@ -54,6 +55,10 @@ def getHTML(template_id):
             .filter(Template.temp_id == template_id)\
             .first()
     return template.html
+
+def getState(instance_id):
+    instance = getTempInstance(instance_id)
+    return instance.savedState
 
 def getTemplate(instance_id):
     instance = getTempInstance(instance_id)
@@ -113,22 +118,27 @@ def deleteRequest(request_id):
         .filter(Request.request_id == request_id).one()
     sess.delete(request)
     sess.commit()
+    count = sess.query(Request)\
+        .filter(Request.request_id == request_id).count()
+    return count == 0
     
 def addNewInstance(net_id, template_id):
     html = getHTML(template_id)
     newInst = TempInstance(owner_id=net_id, template_id=template_id, partner_id="", savedState=html, dueDate=datetime.now())
     sess.add(newInst)
     sess.commit()
-    count =  sess.query(TempInstance)\
-        .filter(TempInstance.instance_id == newInst.instance_id)\
-        .count()
-    return count == 1
-
+    return newInst 
+    
 def addNewRequest(sender_id, receiver_id): 
     request = Request(sender_id=sender_id, receiver_id=receiver_id)
     sess.add(request)
     sess.commit()
     return request
+
+def addPartner(instance_id, partner_id):
+    instance = getTempInstance(instance_id)
+    instance.partner_id = partner_id
+    sess.commit()
 
 def containsUser(net_id):
     count = sess.query(User)\
@@ -145,6 +155,15 @@ def setRequest(instance_id, request_id):
     sess.commit()
     return instance
 
+def updateState(instance_id, html):
+    try:
+        instance = getTempInstance(instance_id)
+        instance.savedState = html
+        sess.commit()
+        return True
+    except Exception as e:
+        print(e)
+        return False
 #------------------------------------------------------------------------------------------
 # returns True if success, False if fail
 # def addPartner(instance_id, partner_id):

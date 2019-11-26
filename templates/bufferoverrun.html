@@ -18,20 +18,21 @@
     <div class="navbar mt-2">
        <div class="navbar-inner">
              <ul class="nav nav-pills">
-                <li class="active"><a class="nav-link active" href="#step0" data-toggle="tab" data-step="0">Context</a></li>
-                <li class="nav-item"><a class="nav-link" href="#step1" data-toggle="tab" data-step="0">Setup</a></li>
-                <li class="nav-item"><a class="nav-link" href="#step2" data-toggle="tab" data-step="1">Step 1</a></li>
-                <li class="nav-item"><a class="nav-link" href="#step3" data-toggle="tab" data-step="2">Step 2</a></li>
-                <li class="nav-item"><a class="nav-link" href="#step4" data-toggle="tab" data-step="3">Step 3</a></li>
-                <li class="nav-item"><a class="nav-link" href="#step5" data-toggle="tab" data-step="4">Step 4</a></li>
-                <li class="nav-item"><a class="nav-link" href="#step6" data-toggle="tab" data-step="5">Step 5</a></li>
-                <li class="nav-item"><a class="nav-link" href="#step7" data-toggle="tab" data-step="6">Step 6</a></li>
-                <li class="nav-item"><a class="nav-link" href="#step8" data-toggle="tab" data-step="7">Wrapping Up</a></li>
+                <li class="active"><a class="nav-link active autosave" href="#step0" num-steps="7" data-toggle="tab" data-step="0">Context</a></li>
+                <li class="nav-item"><a class="nav-link autosave" href="#step1" num-steps="7" data-toggle="tab" data-step="0">Setup</a></li>
+                <li class="nav-item"><a class="nav-link autosave" href="#step2" num-steps="7" data-toggle="tab" data-step="1">Step 1</a></li>
+                <li class="nav-item"><a class="nav-link autosave" href="#step3" num-steps="7" data-toggle="tab" data-step="2">Step 2</a></li>
+                <li class="nav-item"><a class="nav-link autosave" href="#step4" num-steps="7" data-toggle="tab" data-step="3">Step 3</a></li>
+                <li class="nav-item"><a class="nav-link autosave" href="#step5" num-steps="7" data-toggle="tab" data-step="4">Step 4</a></li>
+                <li class="nav-item"><a class="nav-link autosave" href="#step6" num-steps="7" data-toggle="tab" data-step="5">Step 5</a></li>
+                <li class="nav-item"><a class="nav-link autosave" href="#step7" num-steps="7" data-toggle="tab" data-step="6">Step 6</a></li>
+                <li class="nav-item"><a class="nav-link autosave" href="#step8" num-steps="7" data-toggle="tab" data-step="7">Wrapping Up</a></li>
              </ul>
        </div>
     </div>
-    <div class="tab-content mt-4">
-       <div class="tab-pane fade show active" id="step0">
+    <p class="text text-right">Last Updated: <span id="updateTime"> </span></p>
+    <div class="tab-content mt-4" id="tabs">
+       <div class="tab-pane fade active show" id="step0">
             <div class="row">
                     <div class="col col-md-6">
                             <div class="h4">Goal</div>
@@ -118,7 +119,7 @@
                           <div class="input-group mb-3">
                               <input name="netid" type="text" class="form-control" placeholder="Partner's netid" aria-label="Partner's netid" aria-describedby="basic-addon2">
                               <div class="input-group-append">
-                                <button class="btn btn-outline-secondary" name="instance_id" value="{{instance.instance_id}}" action="submit">Add</button>
+                                <button class="btn btn-outline-secondary" id="instance" name="instance_id" value="{{instance.instance_id}}" action="submit">Add</button>
                               </div>
                           </div>
                         </form>
@@ -147,82 +148,60 @@
        </div>
        <div class="tab-pane fade" id="step2">
           <div class="row">
-              <div class="col col-md-6">
-                  <div class="h4">Instructions</div>
-                    <p>Copy these sentences to your <code>readme</code> file, and fill in the blanks so the sentences are correct:</p>
+                <div class="col col-md-12">
+                    <div class="h4">Instructions</div>
+                      <p>Copy these sentences to your <code>readme</code> file, and fill in the blanks so the sentences are correct:</p>
 
-                    <blockquote>
-                    According to 18 U.S. Code 1030, if you were to use a buffer overrun attack to commit fraud or related activity in connection with computers, but did not attempt to cause death and did not knowingly or recklessly cause death, then you could receive a maximum penalty of _____ in prison.
-                    </blockquote>
-                    <blockquote>
-                    According to 18 U.S. Code 1030, if you were to use a buffer overrun attack to commit fraud or related activity in connection with computers, and attempted to cause death or knowingly or recklessly caused death, then you could receive a maximum penalty of _____ in prison.
-                    </blockquote>
-                    
-                    <p>It's fine to do a web search to complete Step 1 of the assignment.</p>
+                      <blockquote>
+                      According to 18 U.S. Code 1030, if you were to use a buffer overrun attack to commit fraud or related activity in connection with computers, but did not attempt to cause death and did not knowingly or recklessly cause death, then you could receive a maximum penalty of _____ in prison.
+                      </blockquote>
+                      <blockquote>
+                      According to 18 U.S. Code 1030, if you were to use a buffer overrun attack to commit fraud or related activity in connection with computers, and attempted to cause death or knowingly or recklessly caused death, then you could receive a maximum penalty of _____ in prison.
+                      </blockquote>
+                      
+                      <p>It's fine to do a web search to complete Step 1 of the assignment.</p>
+                </div>
+          </div>
+          <div class="row">
+              <div class="col col-md-6">
+                  <div class="todolist not-done">
+                      <h1>Todos</h1>
+                         <input type="text" class="form-control add-todo" placeholder="Add todo">
+                             <button id="checkAll" class="btn btn-success">Mark all as done</button>
+                             
+                             <hr>
+                             <ul id="sortable" class="list-unstyled">
+                             <li class="ui-state-default">
+                                 <div class="checkbox">
+                                     <label>
+                                         <input type="checkbox" value="" />Take out the trash</label>
+                                 </div>
+                             </li>
+                             <li class="ui-state-default">
+                                 <div class="checkbox">
+                                     <label>
+                                         <input type="checkbox" value="" />Buy bread</label>
+                                 </div>
+                             </li>
+                             <li class="ui-state-default">
+                                 <div class="checkbox">
+                                     <label>
+                                         <input type="checkbox" value="" />Teach penguins to fly</label>
+                                 </div>
+                             </li>
+                         </ul>
+                         <div class="todo-footer">
+                             <strong><span class="count-todos"></span></strong> Items Left
+                         </div>
+                  </div>
               </div>
               <div class="col col-md-6">
-                  <table class="table">
-                      <thead>
-                        <tr>
-                          <th scope="col">Complete?</th>
-                          <th scope="col">Task</th>
-                          <th scope="col">Assigned to</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr>
-                          <th scope="row">
-                              <div class="form-check">
-                                  <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-                                </div>
-                          </th>
-                          <td>Google "18 U.S. Code 1030"</td>
-                          <td>
-                              <select class="custom-select">
-                                  <option selected>Assign to</option>
-                                  <option value="{{instance.owner_id}}">{{instance.owner_id}}</option>
-                                  {% if instance.partner_id %}                                    
-                                      <option value="{{instance.partner_id}}">{{instance.partner_id}}</option>
-                                  {% endif %}
-                                </select>
-                          </td>
-                        </tr>
-                        <tr>
-                          <th scope="row">
-                              <div class="form-check">
-                                  <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-                                </div>
-                          </th>
-                          <td>Fill in second blank in readme</td>
-                          <td>
-                              <select class="custom-select">
-                                <option selected>Assign to</option>
-                                <option value="{{instance.owner_id}}">{{instance.owner_id}}</option>
-                                {% if instance.partner_id %}                                    
-                                    <option value="{{instance.partner_id}}">{{instance.partner_id}}</option>
-                                {% endif %}
-                              </select>
-                          </td>
-                        </tr>
-                        <tr>
-                          <th scope="row">
-                              <div class="form-check">
-                                  <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-                                </div>
-                          </th>
-                          <td>Fill in first blank in readme</td>
-                          <td>
-                              <select class="custom-select">
-                                  <option selected>Assign to</option>
-                                  <option value="{{instance.owner_id}}">{{instance.owner_id}}</option>
-                                  {% if instance.partner_id %}                                    
-                                      <option value="{{instance.partner_id}}">{{instance.partner_id}}</option>
-                                  {% endif %}
-                              </select>
-                          </td>
-                        </tr>
-                      </tbody>
-                    </table>                                   
+                  <div class="todolist">
+                      <h1>Already Done</h1>
+                         <ul id="done-items" class="list-unstyled">
+                             <li>Some item <button class="remove-item btn btn-default btn-xs pull-right"><span>X</span></button></li>
+                         </ul>
+                     </div>
               </div>
           </div>
           <!-- <a class="btn btn-default prev" href="#">Previous</a>
@@ -385,7 +364,7 @@
                                           </div>
                                         </div>
                                       </div>
-                                </div>
+                          </div>
                     </div>
                 </div>
        </div>
@@ -555,6 +534,6 @@
  </div>
 {% endblock %}
 {% block extrajs %}
-<script src="/../static/js/wizard.js"></script>
 <script src="/../static/js/todo.js"></script>
+<script src="/../static/js/wizard.js"></script>
 {% endblock %}

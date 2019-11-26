@@ -4,50 +4,43 @@
 {% endblock %}
 {% block body %}
 <div class="container" id="myWizard">
-  
-    <h3 class="mt-4">COS 126: Travelling Salesperson</h3>
-   
+    <div class="row">
+        <div class="col col-md-10">
+            <h3 class="mt-4">COS 126: Travelling Salesperson</h3>
+        </div>
+        <div class="col col-md-2">
+            <button class="btn btn-primary mt-4" onclick="location.reload()">Update Page</button>
+        </div>
+    </div>
+    
     <hr>
-   
     <div class="progress">
-      <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="7" style="width: 0%;">
-        Step 0 of 7
+      <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="6" style="width: 0%;">
+        Step 0 of 6
       </div>
     </div>
    
     <div class="navbar mt-2">
        <div class="navbar-inner">
              <ul class="nav nav-pills">
-                <li class="active"><a class="nav-link active" href="#step0" data-toggle="tab" data-step="0">Context</a></li>
-                <li class="nav-item"><a class="nav-link" href="#step1" data-toggle="tab" data-step="0">Setup</a></li>
-                <li class="nav-item"><a class="nav-link" href="#step2" data-toggle="tab" data-step="1">Step 1</a></li>
-                <li class="nav-item"><a class="nav-link" href="#step3" data-toggle="tab" data-step="2">Step 2</a></li>
-                <li class="nav-item"><a class="nav-link" href="#step4" data-toggle="tab" data-step="3">Step 3</a></li>
-                <li class="nav-item"><a class="nav-link" href="#step5" data-toggle="tab" data-step="4">Step 4</a></li>
-                <li class="nav-item"><a class="nav-link" href="#step6" data-toggle="tab" data-step="5">Step 5</a></li>
-                <li class="nav-item"><a class="nav-link" href="#step7" data-toggle="tab" data-step="6">Step 6</a></li>
-                <li class="nav-item"><a class="nav-link" href="#step8" data-toggle="tab" data-step="7">Wrapping Up</a></li>
+                <li class="active"><a class="nav-link active" weight="10" href="#step0" num-steps="6" data-toggle="tab" data-step="0">Context</a></li>
+                <li class="nav-item"><a class="nav-link autosave" weight="15" href="#step1"  num-steps="6"  data-toggle="tab" data-step="0">Setup</a></li>
+                <li class="nav-item"><a class="nav-link autosave" weight="25" href="#step2"  num-steps="6" data-toggle="tab" data-step="1">Step 1</a></li>
+                <li class="nav-item"><a class="nav-link autosave" weight="40" href="#step3"  num-steps="6" data-toggle="tab" data-step="2">Step 2</a></li>
+                <li class="nav-item"><a class="nav-link autosave" weight="50" href="#step4"  num-steps="6" data-toggle="tab" data-step="3">Step 3</a></li>
+                <li class="nav-item"><a class="nav-link autosave" weight="80" href="#step5"  num-steps="6" data-toggle="tab" data-step="4" class="bg-danger">Step 4</a></li>
+                <li class="nav-item"><a class="nav-link autosave" weight="95" href="#step6"  num-steps="6" data-toggle="tab" data-step="5">Step 5</a></li>
+                <li class="nav-item"><a class="nav-link autosave" weight="100" href="#step7"  num-steps="6" data-toggle="tab" data-step="6">Wrapping Up</a></li>
              </ul>
        </div>
     </div>
+    <p class="text text-right">Last Updated: <span id="updateTime"> </span></p>
     <div class="tab-content mt-4">
        <div class="tab-pane fade show active" id="step0">
             <div class="row">
-                    <div class="col col-md-6">
+                    <div class="col col-md-12">
                             <div class="h4">Goal</div>
                             <p>Given n points in the plane, the goal of a traveling salesperson is to visit all of them and return to the starting point, while keeping the total length traveled as short as possible. Implement two greedy heuristics to find good, but not optimal, solutions to the traveling salesperson problem.</p>
-                    </div>
-                    <div class="col col-md-6">
-                            <div class="h4">Overview</div>
-                            <ul>
-                                <li>Number of Steps: 6</li>
-                                <li>Step 1: 2%</li>
-                                <li>Step 2: 37%</li>
-                                <li>Step 3: 12%</li>
-                                <li>Step 4: 15%</li>
-                                <li>Step 5: 24%</li>
-                                <li>Step 6: 10%</li>
-                            </ul>
                     </div>
                </div>
            <div class="row align-items-start mb-4">
@@ -73,201 +66,706 @@
        <div class="tab-pane fade" id="step1">
            <div class="row">
                <div class="col col-md-12">
-                    <div class="h4">Partner Setup</div>
-                    <div class="form">
-                        <label class="font-weight-bold mt-2">Partner: None</label>
-                        <br>
-                        <label class="mt-2">Add Partner</label> 
-                        <input class="form-control" type="text" placeholder="Search" aria-label="Search">
-                    </div>
+                    
                 </div>
             </div>
             <div class="row mt-4">
-                    <div class="col col-md-12">
-                        <div class="h4">Procedure</div>
-                        <p>Download the following Point API. <b>Do not implement it.</b></p>
-                        <pre>
-                                public class <b>Point</b> {
-                                    public        <b>Point(double x, double y)</b>  <span class="comment">// creates the point (x, y)</span>
-                                    public double <b>distanceTo(Point that)</b>     <span class="comment">// returns the Euclidean distance between the two points</span>
-                                    public   void <b>draw()</b>                     <span class="comment">// draws this point to standard drawing</span>
-                                    public   void <b>drawTo(Point that)</b>         <span class="comment">// draws the line segment between the two points</span>
-                                    public String <b>toString()</b>                 <span class="comment">// returns a string representation of this point</span>
-                                }
-                        </pre>                        
-                    </div>               
+                    <div class="col col-md-8">
+                        <div class="h4">Partner Setup</div>
+                            <div class="form">
+                                <label class="font-weight-bold mt-2">Partner: {{partner}}</label>
+                                <br>
+                                <label class="mt-2">Add Partner</label> 
+                                <form action='/addpartner' method='post'>
+                                <div class="input-group mb-3">
+                                    <input name="netid" type="text" class="form-control" placeholder="Partner's netid" aria-label="Partner's netid" aria-describedby="basic-addon2">
+                                    <div class="input-group-append">
+                                        <button class="btn btn-outline-secondary" id="instance" name="instance_id" value="{{instance.instance_id}}" action="submit">Add</button>
+                                    </div>
+                                </div>
+                                </form>
+                            </div>
+                        <div class="h4 mt-4">Procedure</div>
+                        <p>Download the following Point API. <b>Do not implement it.</b> In this assignment, you will use the constructor to create a point, the toString() method to print it, the distanceTo() method to compute the distance between two points, and the drawTo() method to draw a line segment connecting two points</p>
+<pre>
+public class <b>Point</b> {
+public        <b>Point(double x, double y)</b>  <span class="comment">// creates the point (x, y)</span>
+public double <b>distanceTo(Point that)</b>     <span class="comment">// returns the Euclidean distance between the two points</span>
+public   void <b>draw()</b>                     <span class="comment">// draws this point to standard drawing</span>
+public   void <b>drawTo(Point that)</b>         <span class="comment">// draws the line segment between the two points</span>
+public String <b>toString()</b>                 <span class="comment">// returns a string representation of this point</span>
+}
+</pre>                        
+                    </div>
+                    <div class="col col-md-4">
+                        <div class="todolist not-done">
+                            <div class="h4">To Do</div>
+                               <input type="text" class="form-control add-todo" sortid="1" placeholder="Add todo">
+                                   <button id="checkAll" onclick='AllDone(this)' class="btn btn-success" sortid="1">Mark all as done</button>
+                                   <hr>
+                                   <ul id="sortable1" class="list-unstyled">
+                                   <li class="ui-state-default">
+                                       <div class="checkbox">
+                                           <label>
+                                               <input type="checkbox" value="" /> Review the CircularQuote exercise from precept. Focus on understanding circularly linked lists and the do {...} while (...) loop to traverse them.</label>
+                                       </div>
+                                   </li>
+                                   <li class="ui-state-default">
+                                       <div class="checkbox">
+                                           <label>
+                                               <input type="checkbox" value="" /> Download and extract the .zip file mentioned on the assignment page.</label>
+                                       </div>
+                                   </li>
+                                   <li class="ui-state-default">
+                                        <div class="checkbox">
+                                            <label>
+                                                <input type="checkbox" value="" /> Save Tour.java in the same directory.</label>
+                                        </div>
+                                    </li>
+                                   <li class="ui-state-default">
+                                       <div class="checkbox">
+                                           <label>
+                                               <input type="checkbox" value="" /> Study the <a href="https://www.cs.princeton.edu/courses/archive/fall19/cos126/assignments/tsp/tsp/Point.java">Point </a>API.</label>
+                                       </div>
+                                   </li>
+                               </ul>
+                        </div>
+                    </div>             
             </div>
        </div>
        <div class="tab-pane fade" id="step2">
           <div class="row">
-              <div class="col col-md-6">
-                  <div class="h4">Instructions</div>
-                    <p>Implement Tour.java. Note that Tour.java uses the following Node class.</p>
-                    <pre>
-                            private class <b>Node</b> {
-                                private Point <b>p</b>;
-                                private Node  <b>next</b>;
-                            }
-                    </pre>
-                    <pre>
-                            public class <b>Tour</b> {
-                                public        <b>Tour</b>()                                    <span class="comment">// creates an empty tour</span>
-                                public        <b>Tour</b>(Point a, Point b, Point c, Point d)  <span class="comment">// creates the 4-point tour a->b->c->d->a (for debugging)</span>
-                                public    int <b>size</b>()                                    <span class="comment">// returns the number of points in this tour</span>
-                                public double <b>length</b>()                                  <span class="comment">// returns the length of this tour</span>
-                                public String <b>toString</b>()                                <span class="comment">// returns a string representation of this tour</span>
-                                public   void <b>draw</b>()                                    <span class="comment">// draws this tour to standard drawing</span>
-                                public   void <b>insertNearest</b>(Point p)                    <span class="comment">// inserts p using the nearest neighbor heuristic</span>
-                                public   void <b>insertSmallest</b>(Point p)                   <span class="comment">// inserts p using the smallest increase heuristic</span>
-                            
-                                <span class="comment">// tests this class by directly calling all constructors and instance methods</span>
-                                public static void <b>main</b>(String[] args)
-                            <b>}</b>
-                    </pre>
-              </div>
-              <div class="col col-md-6">
-                <div class="row">
-                    <div class="todolist not-done">
-                                 <div class="h4">To-do</div>
-                                    <!-- <input type="text" class="form-control add-todo" placeholder="Add todo"> -->
-                                        <button id="checkAll" class="btn btn-success">Mark all as done</button>
-                                        
-                                        <hr>
-                                        <ul id="sortable" class="list-unstyled">
-                                        <li class="ui-state-default">
-                                            <div class="checkbox">
-                                                <label>
-                                                    <input type="checkbox" value="" />Google "18 U.S. Code 1030"</label>
-                                            </div>
-                                        </li>
-                                        <li class="ui-state-default">
-                                            <div class="checkbox">
-                                                <label>
-                                                    <input type="checkbox" value="" />Fill in first blank in readme</label>
-                                            </div>
-                                        </li>
-                                        <li class="ui-state-default">
-                                            <div class="checkbox">
-                                                <label>
-                                                    <input type="checkbox" value="" />Fill in second blank in readme</label>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                    <div class="todo-footer">
-                                        <strong><span class="count-todos"></span></strong> Items Left
-                                    </div>
-                    </div>
-                    <div class="todolist">
-                            <div class="h4">Already Done</div>
-                            <ul id="done-items" class="list-unstyled">
-                                            <!-- <li>Some item <button class="remove-item btn btn-default btn-xs pull-right"><span class="glyphicon glyphicon-remove"></span></button></li> -->
-                             </ul>
-                    </div>
+              <div class="col col-md-8">
+                  <div class="h4">Instructions: Starting Out</div>
+                    <p>This is the first part of completing the Tour.java API. As a reminder, the API is shown below.</p>
+<pre>
+        private class <b>Node</b> {
+            private Point <b>p</b>;
+            private Node  <b>next</b>;
+        }
+</pre>
+<pre>
+        public class <b>Tour</b> {
+            public        <b>Tour</b>()                                    <span class="comment">// creates an empty tour</span>
+            public        <b>Tour</b>(Point a, Point b, Point c, Point d)  <span class="comment">// creates the 4-point tour a->b->c->d->a (for debugging)</span>
+            public    int <b>size</b>()                                    <span class="comment">// returns the number of points in this tour</span>
+            public double <b>length</b>()                                  <span class="comment">// returns the length of this tour</span>
+            public String <b>toString</b>()                                <span class="comment">// returns a string representation of this tour</span>
+            public   void <b>draw</b>()                                    <span class="comment">// draws this tour to standard drawing</span>
+            public   void <b>insertNearest</b>(Point p)                    <span class="comment">// inserts p using the nearest neighbor heuristic</span>
+            public   void <b>insertSmallest</b>(Point p)                   <span class="comment">// inserts p using the smallest increase heuristic</span>
+                                    
+            <span class="comment">// tests this class by directly calling all constructors and instance methods</span>
+            public static void <b>main</b>(String[] args)
+        <b>}</b>
+</pre>  
+                
                 </div>
-                                                    
-              </div>
-          </div>
-          <!-- <a class="btn btn-default prev" href="#">Previous</a>
-          <a class="btn btn-default next" href="#">Continue</a> -->
+                <div class="col col-md-4">
+                        <div class="todolist not-done">
+                                <div class="h4">To Do</div>
+                                <input type="text" class="form-control add-todo" sortid="2" placeholder="Add todo">
+                                    <button id="checkAll" onclick="AllDone(this)" class="btn btn-success" sortid="2">Mark all as done</button>
+                                    
+                                    <hr>
+                                    <ul id="sortable2" class="list-unstyled">
+                                    <li class="ui-state-default">
+                                        <div class="checkbox">
+                                            <label>
+                                                <input type="checkbox" value="" /> Put the standard linked-list data type Node as a nested class into Tour.java</label>
+                                        </div>
+                                    </li>
+                                    <li class="ui-state-default">
+                                        <div class="checkbox">
+                                            <label>
+                                                <input type="checkbox" value="" /> Include one instance variable, say first, of type Node that is a reference to the "first" node of the circularly linked list.</label>
+                                        </div>
+                                    </li>
+                                    <li class="ui-state-default">
+                                            <div class="checkbox">
+                                                <label>
+                                                    <input type="checkbox" value="" /> Write the Tour() constructor.</label>
+                                            </div>
+                                    </li>
+                                    <li class="ui-state-default">
+                                            <div class="checkbox">
+                                                <label>
+                                                    <input type="checkbox" value="" /> Write the Tour(Point a, Point b, Point c, Point d) constructor by creating four Node objects, assigning one point to each, and linking the nodes to one another in a circular manner.</label>
+                                            </div>
+                                    </li>
+                                </ul>
+                        </div>
+                </div>
+            </div>
        </div>
        <div class="tab-pane fade" id="step3">
-            <div class="row">
-                    <div class="col col-md-12">
-                        <div class="h4">Instructions</div>                            
+           <div class="row">
+               <div class="col col-md-8">
+                   <div class="h4">Instructions</div>
+                    <p>Write the size() method. It should traverse each Node in the circularly linked list, starting at first, and incrementing a counter at each step. This method requires only a few lines of code, but it is important to think about it carefully, because debugging linked-list code is 
+                        notoriously difficult and frustrating. <b>With circularly linked lists, the last node in the list points back to the first node, so watch out for infinite loops.</b></p>
+                    <div id="accordion">
+                            <div class="card">
+                              <div class="card-header" id="headingOne">
+                                <h5 class="mb-0">
+                                  <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                                      Test size() and length()
+                                  </button>
+                                </h5>
+                              </div>
+                          
+                              <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+                                <div class="card-body">
+                                        <p>You can test your code for <code>size()</code> and <code>length()</code> using the following client.</p>
+<pre>public static void main(String[] args) {
+                    
+        <font color=gray>// define 4 points that are the corners of a square</font>
+        Point a = new Point(100.0, 100.0);
+        Point b = new Point(500.0, 100.0);
+        Point c = new Point(500.0, 500.0);
+        Point d = new Point(100.0, 500.0);
+  
+        <font color=gray>// create the tour a -> b -> c -> d -> a</font>
+        Tour squareTour = new Tour(a, b, c, d);
+  
+        <font color=gray>// print the size to standard output</font>
+        int size = squareTour.size();
+        StdOut.println("Number of points = " + size);
+                    
+        <font color=gray>// print the tour length to standard output</font>
+        double length = squareTour.length();
+        StdOut.println("Tour length = " + length);
+  }
+</pre>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="card">
+                                    <div class="card-header" id="headingThree">
+                                      <h5 class="mb-0">
+                                        <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                            Helpful Notes
+                                        </button>
+                                      </h5>
+                                    </div>
+                                    <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
+                                      <div class="card-body">
+                                       <ul class="list">
+                                           <li><code>length()</code> is very similar to <code>size()</code>, except that you need to access two successive points in the tour and call the <code>distanceTo()</code> method from the Point data type.</li>
+                                           <!-- <li><code>toString()</code> is very similar to <code>size()</code>, except that you must create a <code>StringBuilder</code> object and append each Point to the <code>StringBuilder</code> object.</li> -->
+                                       </ul>
+                                      </div>
+                                    </div>
+                            </div>
                     </div>
+                </div>
+                <div class="col col-md-4">
+                    <div class="todolist not-done">
+                            <div class="h4">To Do</div>
+                            <input type="text" class="form-control add-todo" sortid="3" placeholder="Add todo">
+                            <button id="checkAll" onclick="AllDone(this)" class="btn btn-success" sortid="3">Mark all as done</button>
+                                
+                                <hr>
+                            <ul id="sortable3" class="list-unstyled">
+                                <li class="ui-state-default">
+                                        <div class="checkbox">
+                                            <label>
+                                                <input type="checkbox" value="" /> Implement the size() method.</label>
+                                        </div>
+                                </li>
+                                <li class="ui-state-default">
+                                        <div class="checkbox">
+                                            <label>
+                                                <input type="checkbox" value="" /> Test the size() method.</label>
+                                        </div>
+                                </li>
+                                <li class="ui-state-default">
+                                        <div class="checkbox">
+                                            <label>
+                                                <input type="checkbox" value="" /> Implement the length() method.</label>
+                                        </div>
+                                </li>
+                                <li class="ui-state-default">
+                                        <div class="checkbox">
+                                            <label>
+                                                <input type="checkbox" value="" /> Test the length() method.</label>
+                                        </div>
+                                </li>
+                            </ul>
+                    </div>
+                </div>
             </div>
-         </div>
+       </div>
+       <div class="tab-pane fade" id="step4">
+            <div class="row">
+                <div class="col col-md-8">
+                    <div class="h4">Instructions</div>
+                    <p>
+                        Implement <code>toString()</code> and <code>draw()</code>. <code>toString()</code> is very similar to the <code>size()</code> method, 
+                        except that you need to access two successive points in the tour and call the <code>>distanceTo()</code> method from the <code>Point</code>> data type.
+                        The draw() method is very similar to length(), except that you will need to call the drawTo() method from the Point data type. 
+                        You will also need to include the following statements in <code>main()</code>:
+                        <pre>
+                            StdDraw.setXscale(0, 600);
+                            StdDraw.setYscale(0, 600);
+                        </pre>
+                        <div id="accordion">
+                                <div class="card">
+                                  <div class="card-header" id="headingOne">
+                                    <h5 class="mb-0">
+                                      <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                                          Test toString()
+                                      </button>
+                                    </h5>
+                                  </div>
+                              
+                                  <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+                                    <div class="card-body">
+                                            <p>You can test your code for <code>toString()</code> using the following.</p>
+                                            <pre>
+    <font color=gray>// print the tour to standard output</font>
+    StdOut.println(squareTour);
+                                            </pre>
+                                            <p>You should get the following output:</p>
+                                                <pre>
+    (100.0, 100.0)
+    (500.0, 100.0)
+    (500.0, 500.0)
+    (100.0, 500.0)
+                                            </pre>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="card">
+                                  <div class="card-header" id="headingTwo">
+                                    <h5 class="mb-0">
+                                      <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                          Test draw()
+                                      </button>
+                                    </h5>
+                                  </div>
+                                  <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+                                    <div class="card-body">
+                                    <p>
+                                        Test the draw() method on the 4-point tour—you should see a square.
+                                    </p>
+    
+                                    </div>
+                                  </div>
+                                </div>
+                        </div>
+                    </p>
+                </div>
+                <div class="col col-md-4">
+                        <div class="todolist not-done">
+                                <div class="h4">To Do</div>
+                                <input type="text" class="form-control add-todo" sortid="4" placeholder="Add todo">
+                                    <button id="checkAll" onclick="AllDone(this)" class="btn btn-success" sortid="4">Mark all as done</button>
+                                    
+                                    <hr>
+                                    <ul id="sortable4" class="list-unstyled">
+                                    <li class="ui-state-default">
+                                            <div class="checkbox">
+                                                <label>
+                                                    <input type="checkbox" value="" /> Implement the toString() method</label>
+                                            </div>
+                                    </li>
+                                    <li class="ui-state-default">
+                                            <div class="checkbox">
+                                                <label>
+                                                    <input type="checkbox" value="" /> Test the toString() method</label>
+                                            </div>
+                                    </li>
+                                    <li class="ui-state-default">
+                                            <div class="checkbox">
+                                                <label>
+                                                    <input type="checkbox" value="" /> Implement the draw() method</label>
+                                            </div>
+                                    </li>
+                                    <li class="ui-state-default">
+                                            <div class="checkbox">
+                                                <label>
+                                                    <input type="checkbox" value="" /> Test the draw() method</label>
+                                            </div>
+                                    </li>
+                                    
+                                    <!-- <li class="ui-state-default">
+                                            <div class="checkbox">
+                                                <label>
+                                                    <input type="checkbox" value="" /> Implement the size method.</label>
+                                            </div>
+                                        </li>
+                                        <li class="ui-state-default">
+                                            <div class="checkbox">
+                                                <label>
+                                                    <input type="checkbox" value="" /> Write a main() method that defines four points, constructs a new Tour object using those four points, and calls its size() method to test size()</label>
+                                            </div>
+                                        </li>
+                                        <li class="ui-state-default">
+                                            <div class="checkbox">
+                                                <label>
+                                                    <input type="checkbox" value="" /> Implement length()</label>
+                                            </div>
+                                        </li>
+                                        <li class="ui-state-default">
+                                            <div class="checkbox">
+                                                <label>
+                                                    <input type="checkbox" value="" /> Implement toString()</label>
+                                            </div>
+                                        </li>
+                                        <li class="ui-state-default">
+                                            <div class="checkbox">
+                                                <label>
+                                                    <input type="checkbox" value="" /> Implement insertNearest()</label>
+                                            </div>
+                                        </li>
+                                        <li class="ui-state-default">
+                                            <div class="checkbox">
+                                                <label>
+                                                    <input type="checkbox" value="" /> Implement insertSmallest()</label>
+                                            </div>
+                                        </li>     -->
+                                </ul>
+                        </div>
+                </div>
+            </div>
        </div>
        <div class="tab-pane fade" id="step5">
-         <div class="row">
-             <div class="col col-md-12">
-                 <div class="h4">Instructions</div>
-                    <p>The given <code>miniassembler.h</code> interface file declares four functions that generate machine language instructions. Comments in the file describe the functions. The given <code>miniassembler.c</code> implementation file defines one of those functions. Define the other three, thus completing the <code>miniassembler.c</code> implementation file.</p>
+            <div class="row">
+                <div class="col-md-12">    
+                    <div class="row">
+                       <div class="col col-md-8">
+                           <div class="h4">Instructions:</div>
+                           <p>
+                                This step requires you to implement <code>insertNearest()</code>. To determine which node to insert the point p after, compute the Euclidean distance between each point in the tour and p by traversing the circularly linked list. 
+                                As you proceed, store the node containing the closest point and its distance to p. 
+                                After you have found the closest node, create a node containing p, and insert it after the closest node. This involves changing the next field of both the newly created node and the closest node.
+                           </p>
+                           <p>
+                               <b>Note: this is the most difficult part of the assignment.</b>
+                           </p>
+                           <div id="accordion">
+                                <div class="card">
+                                  <div class="card-header" id="headingOne">
+                                    <h5 class="mb-0">
+                                      <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                                          Test insertNearest()
+                                      </button>
+                                    </h5>
+                                  </div>
+                              
+                                  <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+                                    <div class="card-body">
+                                        <p>
+                                            To test insertNearest(), try inserting various points into a 4-point tour.
+                                            Once you have successfully tested on a 4-point tour, here is the resulting tour for the 10-point problem which has length 1566.1363. 
+                                            Note that the optimal tour has length 1552.9612 so this rule does not, in general, yield the best tour.
+                                        </p>
+                                        <pre>
+This file shows the tour and its length after each point is inserted.
+It may be useful for debugging.
 
-                    <p>The given <code>testminiassembler.c</code> file tests the <code>MiniAssembler</code> module. Use the MiniAssembler module and <code>testminiassembler.c</code> to build a program named <code>miniassembler</code>. Run the program, and compare its output to the given <code>testminiassembler.out</code> file to make sure the function definitions in your MiniAssembler module are correct.</p>
-             </div>
-         </div>
-       </div>
+(110.0, 225.0)
+Tour length = 0.0
+
+(110.0, 225.0)
+(161.0, 280.0)
+Tour length = 150.0133327407934
+
+(110.0, 225.0)
+(161.0, 280.0)
+(325.0, 554.0)
+Tour length = 787.358844018307
+
+(110.0, 225.0)
+(161.0, 280.0)
+(325.0, 554.0)
+(490.0, 285.0)
+Tour length = 1094.6173929810654
+
+(110.0, 225.0)
+(161.0, 280.0)
+(157.0, 443.0)
+(325.0, 554.0)
+(490.0, 285.0)
+Tour length = 1139.6938059391582
+
+(110.0, 225.0)
+(161.0, 280.0)
+(157.0, 443.0)
+(283.0, 379.0)
+(325.0, 554.0)
+(490.0, 285.0)
+Tour length = 1259.6276840705505
+
+(110.0, 225.0)
+(161.0, 280.0)
+(157.0, 443.0)
+(283.0, 379.0)
+(325.0, 554.0)
+(397.0, 566.0)
+(490.0, 285.0)
+Tour length = 1313.038203492536
+
+(110.0, 225.0)
+(161.0, 280.0)
+(157.0, 443.0)
+(283.0, 379.0)
+(306.0, 360.0)
+(325.0, 554.0)
+(397.0, 566.0)
+(490.0, 285.0)
+Tour length = 1357.8298213289954
+
+(110.0, 225.0)
+(161.0, 280.0)
+(157.0, 443.0)
+(283.0, 379.0)
+(306.0, 360.0)
+(325.0, 554.0)
+(397.0, 566.0)
+(490.0, 285.0)
+(343.0, 110.0)
+Tour length = 1461.504290888965
+
+(110.0, 225.0)
+(161.0, 280.0)
+(157.0, 443.0)
+(283.0, 379.0)
+(306.0, 360.0)
+(325.0, 554.0)
+(397.0, 566.0)
+(490.0, 285.0)
+(552.0, 199.0)
+(343.0, 110.0)
+Tour length = 1566.1363051360363                                            
+                                        </pre>
+                                    </div>
+                                  </div>
+                                </div>
+                            </div>
+
+                       </div>
+                        <div class="col col-md-4">
+                            <div class="todolist not-done">
+                                        <div class="h4">To Do</div>
+                                        <input type="text" class="form-control add-todo" sortid="5" placeholder="Add todo">
+                                            <button id="checkAll" onclick="AllDone(this)" class="btn btn-success" sortid="5">Mark all as done</button>
+                                            
+                                            <hr>
+                                            <ul id="sortable5" class="list-unstyled">
+                                            <li class="ui-state-default">
+                                                    <div class="checkbox">
+                                                        <label>
+                                                            <input type="checkbox" value="" /> Implement the insertNearest() method.</label>
+                                                    </div>
+                                            </li>
+                           </div>
+                        </div>
+                    </div>                       
+                </div>
+            </div>
+        </div>
         <div class="tab-pane fade" id="step6">
-         <div class="row">
-             <div class="col-md-12">
-                    <div class="h4">Instructions</div>
-                    <p>Compose a C program named <code>createdataA.c</code> that produces a file named <code>dataA</code>, as short and simple as possible, that causes the <code>grader</code> program to write your name and recommend a grade of "A". To receive full credit the <code>dataA</code> file must cause the <code>grader</code> program to generate output whose format is indistinguishable from normal output. Your program must call the four functions that are declared in <code>miniassembler.h</code>.<p>
+            <div class="row">
+                <div class="col col-md-8">
+                    <div class="h4">Instructions: Implement insertSmallest()</div>
+                    <p>
+                        After doing the nearest insertion heuristic, you should be able write the <code>insertSmallest()</code> method by yourself, without any hints. 
+                        The only difference is that you want to insert the point p where it will result in the least possible increase in the total tour length.
+                    </p>
+                    <div id="accordion">
+                            <div class="card">
+                              <div class="card-header" id="headingOne">
+                                <h5 class="mb-0">
+                                  <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                                      Test insertSmallest()
+                                  </button>
+                                </h5>
+                              </div>
+                          
+                              <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+                                <div class="card-body">
+                                    <p>
+                                        To test insertSmallest(), try inserting various points into a 4-point tour.  Once you have successfully tested on a 4-point 
+                                        tour, here is the resulting tour which has length 1655.7462. In this case, the smallest insertion heuristic actually does worse than the nearest insertion heuristic (although this is not typical).
+                                    </p>
+                                    <pre>
+    This file shows the tour and its length after each point is inserted.
+    It may be useful for debugging.
 
-                            <p>The <code>createdataA.c</code> program must write to the <code>dataA</code> file; it must not write to <code>stdout</code>.</p>
-                            
-                            <p>Your <code>createdataA.c</code> file must contain these comments:</p>
-                            
-                            <ul>
-                            <li><p>A <em>file</em> comment, that is, a comment at the beginning of the file providing the file name, your name, and your teammate's name.</p></li>
-                            
-                            <li><p>A <em>function</em> comment describing the "I/O behavior" of the <code>main</code> function. That is, the function comment must describe what the <code>main</code> function accepts as command-line arguments, reads from <code>stdin</code> or any other stream, writes to <code>stdout</code>, <code>stderr</code>, or any other stream, and returns.</p></li>
-                            
-                            <!--
-                            <li><p>A <em>principles of operation</em> comment that describes how the <code>dataA</code> file causes the <code>grader</code> program to recommend the grade "A".</p></li>
-                            -->
-                            
-                            <li><p><em>Local</em> comments, that is, comments throughout your program that thoroughly describe the bytes that the program writes to the <code>dataA</code> file.</p></li>
-                            </ul>
-                            
-                            <blockquote>
-                            <div style="padding:10px;border:5px solid green;">It is acceptable to use "magic numbers" throughout your <code>createdataA.c</code> file.
+    (110.0, 225.0)
+    Tour length = 0.0
+
+    (110.0, 225.0)
+    (161.0, 280.0)
+    Tour length = 150.0133327407934
+
+    (110.0, 225.0)
+    (325.0, 554.0)
+    (161.0, 280.0)
+    Tour length = 787.358844018307
+
+    (110.0, 225.0)
+    (490.0, 285.0)
+    (325.0, 554.0)
+    (161.0, 280.0)
+    Tour length = 1094.6173929810654
+
+    (110.0, 225.0)
+    (490.0, 285.0)
+    (325.0, 554.0)
+    (157.0, 443.0)
+    (161.0, 280.0)
+    Tour length = 1139.6938059391582
+
+    (110.0, 225.0)
+    (283.0, 379.0)
+    (490.0, 285.0)
+    (325.0, 554.0)
+    (157.0, 443.0)
+    (161.0, 280.0)
+    Tour length = 1213.9433802328422
+
+    (110.0, 225.0)
+    (283.0, 379.0)
+    (490.0, 285.0)
+    (397.0, 566.0)
+    (325.0, 554.0)
+    (157.0, 443.0)
+    (161.0, 280.0)
+    Tour length = 1267.3538996548277
+
+    (110.0, 225.0)
+    (283.0, 379.0)
+    (306.0, 360.0)
+    (490.0, 285.0)
+    (397.0, 566.0)
+    (325.0, 554.0)
+    (157.0, 443.0)
+    (161.0, 280.0)
+    Tour length = 1268.541678478853
+
+    (110.0, 225.0)
+    (283.0, 379.0)
+    (306.0, 360.0)
+    (343.0, 110.0)
+    (490.0, 285.0)
+    (397.0, 566.0)
+    (325.0, 554.0)
+    (157.0, 443.0)
+    (161.0, 280.0)
+    Tour length = 1551.1141715191152
+
+    (110.0, 225.0)
+    (283.0, 379.0)
+    (306.0, 360.0)
+    (343.0, 110.0)
+    (552.0, 199.0)
+    (490.0, 285.0)
+    (397.0, 566.0)
+    (325.0, 554.0)
+    (157.0, 443.0)
+    (161.0, 280.0)
+    Tour length = 1655.7461857661865                                        
+                                    </pre>
+                                </div>
+                              </div>
                             </div>
-                            </blockquote>
-                            
-                            <blockquote>
-                            <div style="padding:10px;border:5px solid green;">
-                            For the "A" attack it's OK to truncate your name(s) if necessary.
-                            </div>
-                            </blockquote>
-                            
-                            <blockquote>
-                            <div style="padding:10px;border:5px solid green;">Suggestion: After creating your <code>dataA</code> file, issue the command <code>xxd dataA</code> to confirm that the file contains exactly the bytes that you want it to contain.
-                            </div>
-                            </blockquote>
-             </div>
-         </div>
+                    </div>
+                </div>
+                <div class="col col-md-4">
+                        <div class="todolist not-done">
+                                <div class="h4">To Do</div>
+                                <input type="text" class="form-control add-todo" sortid="6" placeholder="Add todo">
+                                    <button id="checkAll" onclick="AllDone(this)" class="btn btn-success" sortid="6">Mark all as done</button>
+                                    
+                                    <hr>
+                                    <ul id="sortable6" class="list-unstyled">
+                                        <li class="ui-state-default">
+                                            <div class="checkbox">
+                                                <label>
+                                                    <input type="checkbox" value="" /> Implement insertSmallest()</label>
+                                            </div>
+                                        </li>    
+                                </ul>
+                        </div>
+                </div>
+            </div>
        </div>
        <div class="tab-pane fade" id="step7">
             <div class="row">
-                <div class="col-md-12">
-                    <div class="h4">Instructions</div>
-                    <p>Compose a C program named <code>createdataAplus.c</code> that produces a file named <code>dataAplus</code>, as short and simple as possible, that causes the <code>grader</code> program to write your name and recommend a grade of "A+". To receive credit the <code>dataAplus</code> file must cause the <code>grader</code> program to generate output whose format is indistinguishable from normal output. </p>
-
-                    <p>The <code>createdataAplus.c</code> program must write to the <code>dataAplus</code> file; it must not write to <code>stdout</code>.</p>
-
-                    <p>Your <code>createdataAplus.c</code> file must contain:</p>
-
-                    <ul>
-                    <li><p>A <em>file</em> comment, that is, a comment at the beginning of the file providing the file name, your name, and your teammate's name.</p></li>
-
-                    <li><p>A <em>function</em> comment describing the "I/O behavior" of the <code>main</code> function. That is, the function comment must describe what the <code>main</code> function accepts as command-line arguments, reads from <code>stdin</code> or any other stream, writes to <code>stdout</code>, <code>stderr</code>, or any other stream, and returns.</p></li>
-
-                    <!--
-                    <li><p>A <em>principles of operation</em> comment that describes how the <code>dataAplus</code> file causes the <code>grader</code> program to recommend the grade "A+".</p></li>
-                    -->
-
-                    <li><p><em>Local</em> comments, that is, comments throughout your program that thoroughly describe the bytes that the program writes to the <code>dataAplus</code> file.</p></li>
-                    </ul>
-
-                    <blockquote>
-                    <div style="padding:10px;border:5px solid green;">It is acceptable to use "magic numbers" throughout your <code>createdataAplus.c</code> file.
+                    <div class="col-md-12">    
+                        <div class="row">
+                           <div class="col col-md-12">
+                               <div class="h4">Instructions: Input and Testing</div>
+                               <p>
+                                   <strong>Input and testing.</strong>The input format begins with two integers <em>width</em> and <em>height</em>, followed by pairs of <em>x</em>- and <em>y</em>-coordinates. All <em>x</em>-coordinates will be real numbers between 0 and <em>width</em>; all <em>y</em>-coordinates will be real numbers between 0 and <em>height</em>. For example, <a href="tsp/tsp1000.txt">tsp1000.txt</a> contains the following data:</p>
+                                   <pre>% <b>more tsp1000.txt</b>
+                                       800 800
+                                       185.0411 457.8824
+                                       247.5023 299.4322
+                                       701.3532 369.7156
+                                       563.2718 442.3282
+                                       144.5569 576.4812
+                                       535.9311 478.4692
+                                       383.8523 458.4757
+                                       329.9402 740.9576
+                                       ...
+                                       254.9820 302.2548
+                                   </pre>
+                               </p>
+                                   <p>After implementing <tt>Tour.java</tt>, use the client program <a href="tsp/NearestInsertion.java">NearestInsertion.java</a>, which reads the points from standard input; runs the nearest neighbor heuristic; prints the resulting tour, its length, and its number of points to standard output; and draws the resulting tour to standard drawing. <a href="tsp/SmallestInsertion.java">SmallestInsertion.java</a> is analogous but runs the smallest increase heuristic.</p>
+       
+                                           <table style="margin: auto; border-spacing: 15px; border-collapse: separate;">
+       
+                                               <tr>
+                                                   <td>
+                                                       <pre>
+                                   % <b>java-introcs NearestInsertion < tsp1000.txt</b>
+                                   (185.0411, 457.8824)
+                                   (198.3921, 464.6812)
+                                   (195.8296, 456.6559)
+                                   (216.8989, 455.126)
+                                   (213.3513, 468.0186)
+                                   (241.4387, 467.413)
+                                   (259.0682, 473.7961)
+                                   (221.5852, 442.8863)
+                                   ...
+                                   (264.57, 410.328)
+       
+                                   Tour length = 27868.7106
+                                   Number of points = 1000
+                                   </pre> </td>
+                                                   <td>
+                                                       <pre>% <b>java-introcs SmallestInsertion < tsp1000.txt</b>
+                                   (185.0411, 457.8824)
+                                   (195.8296, 456.6559)
+                                   (193.0671, 450.2405)
+                                   (200.7237, 426.3461)
+                                   (200.5698, 422.6481)
+                                   (217.4682, 434.3839)
+                                   (223.1549, 439.8027)
+                                   (221.5852, 442.8863)
+                                   ...
+                                   (186.8032, 449.9557)
+       
+                                   Tour length = 17265.6282
+                                   Number of points = 1000</pre> </td>
+                                               </tr>
+                               </p>
+                           </div>
+                   </div>
+                   <div class="row">
+                    <div class="col col-md-12">
+                        <div class="h4">Instructions: Analysis</div>
+                        <p><b>Analysis.</b> In your <tt>readme.txt</tt>, estimate the running time (in seconds) of your program as a function of the number of points <em>n</em>. You may use the client <a href="tsp/TSPTimer.java">TSPTimer.java</a> help collect data points. (It relies on <a href="http://introcs.cs.princeton.edu/java/stdlib/javadoc/Stopwatch.html">Stopwatch</a>, which is part of <tt>stdlib.jar</tt>.) Run the two heuristics for <em>n</em> = 1,000, and repeatedly double <em>n</em> until the execution time exceeds 60 seconds.</p>
+       
                     </div>
-                    </blockquote>
-
-                    <blockquote>
-                    <div style="padding:10px;border:5px solid green;">
-                    For the "A+" attack it's OK to truncate your name(s) if necessary.
-                    </div>
-                    </blockquote>
-
-                    <blockquote>
-                    <div style="padding:10px;border:5px solid green;">
-                    For the "A+" attack it's OK to declare additional functions in the <code>miniassembler.h</code> file and define additional functions in the <code>miniassembler.c</code> file.
-                    </div>
-                    </blockquote>  
                 </div>
-            </div>
+                           
+                    </div>
+                </div>
         </div>
         <div class="tab-pane fade" id="step8">
                 <div class="row">
@@ -304,6 +802,10 @@
  </div>
 {% endblock %}
 {% block extrajs %}
+<script
+  src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"
+  integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU="
+  crossorigin="anonymous"></script>
 <script src="/../static/js/wizard.js"></script>
 <script src="/../static/js/todo.js"></script>
 {% endblock %}

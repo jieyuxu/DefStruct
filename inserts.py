@@ -1,6 +1,6 @@
 # 1 - imports
 from datetime import date, datetime
-from utils.base import Session, engine, Base
+from utils.base import Base, session_factory, engine
 from utils.db import User, TempInstance, Request, Template 
 from utils.api import *
 
@@ -8,9 +8,10 @@ from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 
-session = Session()
+session = session_factory()
 # 2 - create a new session
 Base.metadata.drop_all(engine)
+print('dropped database')
 session.commit()
 
 # 3 - generate database schema
@@ -18,7 +19,6 @@ Base.metadata.create_all(engine)
 
 # 4 - create users
 # jyxu = User(net_id='jyxu')
-bob = User(net_id='bob')
 # 5 - create template
 
 try: 
@@ -51,43 +51,42 @@ except Exception as e:
 
 # 8 - persists data
 # session.add(jyxu)
-session.add(bob)
 session.add(bufferoverrun)
 session.add(tsp)
 # session.add(jyxu_bob)
 
 # 10 - commit and close session
 session.commit()
-print("#----------------------------------------------------------------------------------------------------")
-print("printing bob ", bob)
-print(bufferoverrun)
-# print("check if request and instances are linked: ", inst1.request)
-#----------------------------------------------------------------------------------------------------
-print("#----------------------------------------------------------------------------------------------------")
-print("testing get user".upper())
-# print('getting user jyxu', getUser('jyxu'))
-print('getting user bob', getUser('bob'))
-print("#----------------------------------------------------------------------------------------------------")
-print("testing get all templates".upper())
-templates = getAllTemplates()
-for template in templates:
-    print("template: ", template)
-print("#----------------------------------------------------------------------------------------------------")
-print("testing get all instances".upper())
-instances = getAllInstances('bob')
+# print("#----------------------------------------------------------------------------------------------------")
+# print("printing bob ", bob)
+# print(bufferoverrun)
+# # print("check if request and instances are linked: ", inst1.request)
+# #----------------------------------------------------------------------------------------------------
+# print("#----------------------------------------------------------------------------------------------------")
+# print("testing get user".upper())
+# # print('getting user jyxu', getUser('jyxu'))
+# print('getting user bob', getUser('bob'))
+# print("#----------------------------------------------------------------------------------------------------")
+# print("testing get all templates".upper())
+# templates = getAllTemplates()
+# for template in templates:
+#     print("template: ", template)
+# print("#----------------------------------------------------------------------------------------------------")
+# print("testing get all instances".upper())
+# instances = getAllInstances('bob')
 
-print("printing all of bob's instances")
-for inst in instances:
-    print("template: ", template)
-    print("due date is ", getDueDate(inst.instance_id))
-print("#----------------------------------------------------------------------------------------------------")
-print("testing get all request".upper())
-requests = getAllRequests('jyxu')
+# print("printing all of bob's instances")
+# for inst in instances:
+#     print("template: ", template)
+#     print("due date is ", getDueDate(inst.instance_id))
+# print("#----------------------------------------------------------------------------------------------------")
+# print("testing get all request".upper())
+# requests = getAllRequests('jyxu')
 
-print("printing all of jyxu's instances")
-for req in requests:
-    print("request: ", req)
-print("#----------------------------------------------------------------------------------------------------")
+# print("printing all of jyxu's instances")
+# for req in requests:
+#     print("request: ", req)
+# print("#----------------------------------------------------------------------------------------------------")
 
 # addPartner(inst1.instance_id, 'bob')
 # print(getPartner(inst1.instance_id, 'jyxu'))
