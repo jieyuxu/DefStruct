@@ -4,7 +4,6 @@
 # app.py
 # Author: Amy Xu
 #-----------------------------------------------------------------------
-
 from sys import argv, exit
 from flask import Flask, request, make_response, redirect, url_for, render_template, render_template_string
 from flask import session
@@ -16,8 +15,7 @@ from datetime import date, datetime
 from utils.base import session_factory, engine
 from utils.api import *
 from flask_sqlalchemy_session import flask_scoped_session
-
-import os, pickle
+import os
 
 app = Flask(__name__)
 app.secret_key = 'kdshkjsdhskdjfhsdkjsdfkjsdkjh'
@@ -28,10 +26,11 @@ sess = flask_scoped_session(session_factory, app)
 cas = CAS(app)
 app.config['CAS_SERVER'] = "https://fed.princeton.edu/cas/login"
 app.config['CAS_AFTER_LOGIN'] = 'reroute'
-app.config['CAS_AFTER_LOGOUT'] = 'http://localhost:5000/relogout'
+# app.config['CAS_AFTER_LOGOUT'] = 'http://localhost:5000/relogout'
+app.config['CAS_AFTER_LOGOUT'] = 'https://defstruct.herokuapp.com/relogout'
 app.config['CAS_LOGIN_ROUTE'] = '/cas'
 
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:enchantix@localhost:5555/defstruct-local'
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['DATABASE_URL']
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
 #-----------------------------------------------------------------------
 
@@ -212,5 +211,5 @@ def isLoggedIn():
 
 
 if __name__ == '__main__':
-    main.permanent_session_lifetime = timedelta(days=1)
+    permanent_session_lifetime = timedelta(days=1)
     app.run()
