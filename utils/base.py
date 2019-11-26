@@ -6,6 +6,7 @@ import os
 Base = declarative_base()
 
 #postgresql://postgres:enchantix@localhost/defstruct-local
-engine = create_engine('postgresql://postgres:enchantix@localhost:5555/defstruct-local')
+url = os.environ['DATABASE_URL']
+engine = create_engine(url)
 session_factory = sessionmaker(bind=engine)
 
