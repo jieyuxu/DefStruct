@@ -2,8 +2,6 @@
 from datetime import date, datetime
 from utils.base import Base, session_factory, engine
 from utils.db import User, TempInstance, Request, Template 
-from utils.api import *
-
 from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
