@@ -129,7 +129,9 @@ def addNewInstance(net_id, template_id):
     sess.commit()
     return newInst 
     
-def addNewRequest(sender_id, receiver_id): 
+def addNewRequest(sender_id, receiver_id, instance_id):
+    if hasRequest(instance_id):
+        return None
     request = Request(sender_id=sender_id, receiver_id=receiver_id)
     sess.add(request)
     sess.commit()
@@ -147,13 +149,16 @@ def containsUser(net_id):
         return False
     return True 
 
-def setRequest(instance_id, request_id):
+def hasRequest(instance_id):
     instance = getTempInstance(instance_id)
+    return instance.request is not None 
+
+def setRequest(instance_id, request_id):
+    instance = getTempInstance(instance_id)    
     instance.request_id = request_id
     # testing
-    print(instance.request_id)
+    # print(instance.request_id)
     sess.commit()
-    return instance
 
 def updateState(instance_id, html):
     try:

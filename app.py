@@ -36,19 +36,6 @@ app.config['CAS_LOGIN_ROUTE'] = '/cas'
 
 #-----------------------------------------------------------------------
 
-@app.route('/testtemplate1')
-@login_required
-def test1():
-    instance = getTempInstance(3)
-    return render_template('bufferoverrun.html', instance=instance)
-
-@app.route('/testtemplate2')
-@login_required
-def test():
-    instance = getTempInstance(4)
-    return render_template('tsp.html', instance=instance)
-
-
 @app.route('/')
 @app.route('/index')
 def index():
@@ -67,23 +54,18 @@ def profile():
         return render_template("profile.html", loggedin=isLoggedIn(), allInstances=allInstances, sentRequests=sentRequests, awaitingRequests=awaitingRequests)
     return redirect(url_for('index'))
 
-@app.route('/testtemplate')
-@login_required
-def testtemplate():
-    return render_template('tsp.html', loggedin=isLoggedIn())
+#-----------------------------------------------------------------------
 
 @app.route('/reroute')
 def reroute():
-    print(app.config['CAS_USERNAME_SESSION_KEY'])
-    print(cas.username)
     if cas.username is not None:
-        print("user: ", cas.username) 
         session['username'] = cas.username.strip()
         session.modified = True
         user = getUser(session['username'])
-        print(user)
         return redirect(url_for('profile'))
     return redirect(url_for('login'))
+
+#-----------------------------------------------------------------------
 
 @app.route('/relogout')
 @login_required
@@ -91,6 +73,7 @@ def relogout():
     session.pop('username')
     return redirect(url_for('index'))
 
+#-----------------------------------------------------------------------
 @app.route('/library', methods=['GET', 'POST'])
 @login_required
 def library():
@@ -100,6 +83,7 @@ def library():
     templates = getAllTemplates()
     return render_template("library.html", loggedin=isLoggedIn(), templates=templates, error=error)
 
+#-----------------------------------------------------------------------
 @app.route('/addtemplate', methods=['POST', 'GET'])
 @login_required
 def addtemplate():
@@ -113,14 +97,14 @@ def addtemplate():
     else:
         return redirect(url_for('cas.login'))
     
-
+#-----------------------------------------------------------------------
 @app.route('/deletetemplate', methods=['GET'])
 @login_required
 def deletetemplate():
     inst_id = request.args.get('instance_id')
-    print(inst_id)
     return redirect('/profile')
     
+#-----------------------------------------------------------------------
 @app.route('/edittemplate')
 @login_required
 def edittemplate():
@@ -135,7 +119,8 @@ def edittemplate():
                 return render_template_string(instance.savedState, instance=instance, partner=partner, loggedin=isLoggedIn(), date=datetime.now()) 
             return render_template_string(instance.savedState, instance=instance, partner=partner, loggedin=isLoggedIn()) 
     return redirect(url_for('cas.login'))
-    
+
+#-----------------------------------------------------------------------
 @app.route('/handleAwaitingRequest', methods=['POST'])
 @login_required
 def handleAwaitingRequest():
@@ -145,7 +130,6 @@ def handleAwaitingRequest():
             instance = getInstanceFromRequest(reqid)
             req = getRequestByID(reqid)
             addPartner(instance.instance_id, req.receiver_id)
-            print("new partner added ", instance.partner_id)
             isDeleted = deleteRequest(reqid)
             if not isDeleted:
                 print("deletion error")
@@ -157,6 +141,7 @@ def handleAwaitingRequest():
                 print("deletion error")
     return redirect(url_for('profile'))
 
+#-----------------------------------------------------------------------
 @app.route('/cancelRequest', methods=['POST', 'GET'])
 @login_required
 def cancelRequest():
@@ -164,10 +149,9 @@ def cancelRequest():
         formdata = request.form
         request_id = formdata['cancel']
         deleteRequest(request_id)
-        # for key, val in formdata.items():
-        #     print(key, val)
     return redirect(url_for('profile'))
 
+#-----------------------------------------------------------------------
 @app.route('/handleinstance', methods=['POST', 'GET'])
 @login_required
 def handleinstance():
@@ -181,6 +165,7 @@ def handleinstance():
                 print("serious error happened in handle instance")
     return redirect(url_for('profile'))
 
+#-----------------------------------------------------------------------
 @app.route('/addpartner', methods=['POST', 'GET'])
 @login_required
 def addpartner():
@@ -189,8 +174,6 @@ def addpartner():
             content = request.get_json()
             partner = content['netid']
             instance_id= content['instance']
-            print(partner)
-            print(instance_id)
             error = ""
             if (partner == session['username']):
                 error = 'You cannot be partners with yourself.'
@@ -206,9 +189,9 @@ def addpartner():
             else:
                 error = 'There is already an existing request. Please cancel it before sending a new one.'
                 return error
-        # return render_template_string(html, instance=instance.instance_id, partner=instance.partner_id)        
     return redirect(url_for('profile'))
 
+#-----------------------------------------------------------------------
 @app.route('/savedata', methods=['POST', 'GET'])
 @login_required
 def savedata():
@@ -219,17 +202,6 @@ def savedata():
             html = content['newstate']
             updateState(instance_id, html)
             return content['newstate']
-
-# @app.route('/updatepage', methods=['POST'])
-# @login_required
-# def update():
-#     if isLoggedIn() and request.method == 'POST':
-#         if request.is_json:
-#             content = request.get_json()
-#             instance_id = content['instance']
-#             state = getState(instance_id)
-#             return state
-
 #-----------------------------------------------------------------------
 def isLoggedIn():
     return 'username' in session
