@@ -28,8 +28,8 @@ sess = flask_scoped_session(session_factory, app)
 cas = CAS(app)
 app.config['CAS_SERVER'] = "https://fed.princeton.edu/cas/login"
 app.config['CAS_AFTER_LOGIN'] = 'reroute'
-app.config['CAS_AFTER_LOGOUT'] = 'http://localhost:5000/relogout'
-# app.config['CAS_AFTER_LOGOUT'] = 'https://defstruct.herokuapp.com/relogout'
+# app.config['CAS_AFTER_LOGOUT'] = 'http://localhost:5000/relogout'
+app.config['CAS_AFTER_LOGOUT'] = 'https://defstruct.herokuapp.com/relogout'
 app.config['CAS_LOGIN_ROUTE'] = '/cas'
 
 # app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['DATABASE_URL']
