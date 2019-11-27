@@ -4,8 +4,14 @@
 {% endblock %}
 {% block body %}
 <div class="container" id="myWizard">
-  
-    <h3 class="mt-4">COS 217: Buffer Overflow</h3>
+    <div class="row">
+        <div class="col col-md-10">
+            <h3 class="mt-4">COS 217: Buffer Overrun</h3>
+        </div>
+        <div class="col col-md-2">
+            <button class="btn btn-primary mt-4" data-toggle="popover" data-trigger="hover" data-content="If you and your partner are working together on different screens, click to update your screen to your partner's." onclick="location.reload()">Update Page</button>
+        </div>
+    </div>
    
     <hr>
    
@@ -18,15 +24,15 @@
     <div class="navbar mt-2">
        <div class="navbar-inner">
              <ul class="nav nav-pills">
-                <li class="active"><a class="nav-link active autosave" href="#step0" num-steps="7" data-toggle="tab" data-step="0">Context</a></li>
-                <li class="nav-item"><a class="nav-link autosave" href="#step1" num-steps="7" data-toggle="tab" data-step="0">Setup</a></li>
-                <li class="nav-item"><a class="nav-link autosave" href="#step2" num-steps="7" data-toggle="tab" data-step="1">Step 1</a></li>
-                <li class="nav-item"><a class="nav-link autosave" href="#step3" num-steps="7" data-toggle="tab" data-step="2">Step 2</a></li>
-                <li class="nav-item"><a class="nav-link autosave" href="#step4" num-steps="7" data-toggle="tab" data-step="3">Step 3</a></li>
-                <li class="nav-item"><a class="nav-link autosave" href="#step5" num-steps="7" data-toggle="tab" data-step="4">Step 4</a></li>
-                <li class="nav-item"><a class="nav-link autosave" href="#step6" num-steps="7" data-toggle="tab" data-step="5">Step 5</a></li>
-                <li class="nav-item"><a class="nav-link autosave" href="#step7" num-steps="7" data-toggle="tab" data-step="6">Step 6</a></li>
-                <li class="nav-item"><a class="nav-link autosave" href="#step8" num-steps="7" data-toggle="tab" data-step="7">Wrapping Up</a></li>
+                <li class="active"><a class="nav-link active autosave" href="#step0" weight="0" num-steps="7" data-toggle="tab" data-step="0">Context</a></li>
+                <li class="nav-item"><a class="nav-link autosave" href="#step1" weight="0" num-steps="7" data-toggle="tab" data-step="0">Setup</a></li>
+                <li class="nav-item"><a class="nav-link autosave" href="#step2" weight="5" num-steps="7" data-toggle="tab" data-step="1">Step 1</a></li>
+                <li class="nav-item"><a class="nav-link autosave" href="#step3" weight="30" num-steps="7" data-toggle="tab" data-step="2">Step 2</a></li>
+                <li class="nav-item"><a class="nav-link autosave" href="#step4" weight="40" num-steps="7" data-toggle="tab" data-step="3">Step 3</a></li>
+                <li class="nav-item"><a class="nav-link autosave" href="#step5" weight="60" num-steps="7" data-toggle="tab" data-step="4">Step 4</a></li>
+                <li class="nav-item"><a class="nav-link autosave" href="#step6" weight="80" num-steps="7" data-toggle="tab" data-step="5">Step 5</a></li>
+                <li class="nav-item"><a class="nav-link autosave" href="#step7" weight="100" num-steps="7" data-toggle="tab" data-step="6">Step 6</a></li>
+                <li class="nav-item"><a class="nav-link autosave" href="#step8" weight="100" num-steps="7" data-toggle="tab" data-step="7">Wrapping Up</a></li>
              </ul>
        </div>
     </div>
@@ -34,14 +40,13 @@
     <div class="tab-content mt-4" id="tabs">
        <div class="tab-pane fade active show" id="step0">
             <div class="row">
-                    <div class="col col-md-6">
+                    <div class="col col-md-8">
                             <div class="h4">Goal</div>
                             <p>The purpose of this assignment is to help you learn (1) how programs are represented in ARMv8 machine language, (2) how ARMv8 stack frames are structured in memory, and (3) how ARMv8 programs can be vulnerable to buffer overrun attacks.</p>
                     </div>
-                    <div class="col col-md-6">
-                            <div class="h4">Overview</div>
+                    <div class="col col-md-4">
+                            <div class="h4">Grading Breakdown</div>
                             <ul>
-                                <li>Number of Steps: 6</li>
                                 <li>Step 1: 2%</li>
                                 <li>Step 2: 37%</li>
                                 <li>Step 3: 12%</li>
@@ -148,7 +153,7 @@
        </div>
        <div class="tab-pane fade" id="step2">
           <div class="row">
-                <div class="col col-md-12">
+                <div class="col col-md-8">
                     <div class="h4">Instructions</div>
                       <p>Copy these sentences to your <code>readme</code> file, and fill in the blanks so the sentences are correct:</p>
 
@@ -161,48 +166,29 @@
                       
                       <p>It's fine to do a web search to complete Step 1 of the assignment.</p>
                 </div>
-          </div>
-          <div class="row">
-              <div class="col col-md-6">
-                  <div class="todolist not-done">
-                      <h1>Todos</h1>
-                         <input type="text" class="form-control add-todo" placeholder="Add todo">
-                             <button id="checkAll" class="btn btn-success">Mark all as done</button>
-                             
-                             <hr>
-                             <ul id="sortable" class="list-unstyled">
-                             <li class="ui-state-default">
-                                 <div class="checkbox">
-                                     <label>
-                                         <input type="checkbox" value="" />Take out the trash</label>
-                                 </div>
-                             </li>
-                             <li class="ui-state-default">
-                                 <div class="checkbox">
-                                     <label>
-                                         <input type="checkbox" value="" />Buy bread</label>
-                                 </div>
-                             </li>
-                             <li class="ui-state-default">
-                                 <div class="checkbox">
-                                     <label>
-                                         <input type="checkbox" value="" />Teach penguins to fly</label>
-                                 </div>
-                             </li>
-                         </ul>
-                         <div class="todo-footer">
-                             <strong><span class="count-todos"></span></strong> Items Left
-                         </div>
-                  </div>
-              </div>
-              <div class="col col-md-6">
-                  <div class="todolist">
-                      <h1>Already Done</h1>
-                         <ul id="done-items" class="list-unstyled">
-                             <li>Some item <button class="remove-item btn btn-default btn-xs pull-right"><span>X</span></button></li>
-                         </ul>
-                     </div>
-              </div>
+                <div class="col col-md-4">
+                    <div class="todolist not-done">
+                        <h1>Todos</h1>
+                           <input type="text" class="form-control add-todo" sortid="0" placeholder="Add todo">
+                               <button id="checkAll" class="btn btn-success" sortid="0">Mark all as done</button>
+                               
+                               <hr>
+                               <ul id="sortable" class="list-unstyled">
+                               <li class="ui-state-default">
+                                   <div class="checkbox">
+                                       <label>
+                                           <input type="checkbox" value="" /> Fill in first blank</label>
+                                   </div>
+                               </li>
+                               <li class="ui-state-default">
+                                   <div class="checkbox">
+                                       <label>
+                                           <input type="checkbox" value="" /> Fill in second blank</label>
+                                   </div>
+                               </li>
+                           </ul>
+                    </div>
+                </div>
           </div>
           <!-- <a class="btn btn-default prev" href="#">Previous</a>
           <a class="btn btn-default next" href="#">Continue</a> -->
@@ -213,10 +199,11 @@
                         <div class="h4">Instructions</div>
                             <p>Create a text file named <code>memorymap</code>. Begin your <code>memorymap</code> file with your name and your teammate's name.
                                 Take the <code>grader</code> executable binary file that we have provided you, and use <code>gdb</code> to analyze its sections.</p>
+                            <p><b>Note: This is the most difficult and most important step in this assignment. The following steps will be go more smoothly if you have well-done memory maps. Please complete this portion carefully.</b></p>
                     </div>
             </div>
             <div class="row">
-                    <div class="col-md-12">
+                    <div class="col-md-8">
                           <div id="accordion">
                                   <div class="card">
                                     <div class="card-header" id="headingOne">
@@ -232,8 +219,8 @@
                                             <p>Analyze the <strong>text</strong> section by issuing this <code>x</code> command:</p>
 
                                             <pre>
-                                            $ gdb grader
-                                            (gdb) x/71i readString
+        $ gdb grader
+        (gdb) x/71i readString
                                             </pre>
                                             
                                             <p>Then copy the resulting 71 lines of assembly language code into your <code>memorymap</code> file. (Be careful: <code>gdb</code> displays the lines one windowfull at a time, so you must press the &lt;Enter&gt; key to see all 71 lines.) Then annotate the lines to explain them.</p>
@@ -242,17 +229,17 @@
                                             
                                             <blockquote>
                                             <pre>
-                                            Annotation
-                                            Line of assembly language code
-                                            Line of assembly language code
-                                            ...
-                                            &lt;blank line&gt;
-                                            Annotation
-                                            Line of assembly language code
-                                            Line of assembly language code
-                                            ...
-                                            &lt;blank line&gt;
-                                            ...
+        Annotation
+        Line of assembly language code
+        Line of assembly language code
+        ...
+        &lt;blank line&gt;
+        Annotation
+        Line of assembly language code
+        Line of assembly language code
+        ...
+        &lt;blank line&gt;
+        ...
                                             </pre>
                                             </blockquote>
                                             
@@ -260,13 +247,13 @@
                                             
                                             <blockquote>
                                             <pre>
-                                            Prolog
-                                            First loop setup
-                                            First loop
-                                            buf[i] = '\0'
-                                            Second loop setup
-                                            Second loop
-                                            Epilog and return
+        Prolog
+        First loop setup
+        First loop
+        buf[i] = '\0'
+        Second loop setup
+        Second loop
+        Epilog and return
                                             </pre>
                                             </blockquote>
                                             
@@ -274,10 +261,10 @@
                                             
                                             <blockquote>
                                             <pre>
-                                            Prolog
-                                            printf("What is your name?\n");
-                                            readString();
-                                            Epilog and return
+        Prolog
+        printf("What is your name?\n");
+        readString();
+        Epilog and return
                                             </pre>
                                             </blockquote>
                                             
@@ -285,14 +272,14 @@
                                             
                                             <blockquote>
                                             <pre>
-                                            Prolog
-                                            mprotect(...);
-                                            getName();      
-                                            if (strcmp(name, "Andrew Appel") != 0) skip assignment to grade
-                                            grade = 'B';
-                                            printf("%c is your grade.\n", grade);      
-                                            printf("Thank you, %s.\n", name);
-                                            Epilog and return 0   
+        Prolog
+        mprotect(...);
+        getName();      
+        if (strcmp(name, "Andrew Appel") != 0) skip assignment to grade
+        grade = 'B';
+        printf("%c is your grade.\n", grade);      
+        printf("Thank you, %s.\n", name);
+        Epilog and return 0   
                                             </pre>
                                             </blockquote>
                                       </div>
@@ -311,11 +298,11 @@
                                             <p>Analyze the <strong>data</strong> section by issuing these <code>gdb</code> commands:</p>
 
                                             <pre>
-                                            $ gdb grader
-                                            (gdb) break main
-                                            (gdb) run
-                                            (gdb) print &amp;grade
-                                            (gdb) x/x &amp;grade
+        $ gdb grader
+        (gdb) break main
+        (gdb) run
+        (gdb) print &amp;grade
+        (gdb) x/x &amp;grade
                                             </pre>
                                             
                                             <p>Place a table in your <code>memorymap</code> file showing the layout of the data section. The table must have three columns: <em>Address (in hex)</em>, <em>Content (in hex)</em>, and <em>Description</em>. The table must contain one row for each byte in the data section. Since the data section contains exactly one byte, the table must contain exactly one row.</p>
@@ -334,8 +321,8 @@
                                       <div class="card-body">
                                         <p>Analyze the <strong>bss</strong> section by issuing this <code>gdb</code> command:</p>
                                         <pre>
-                                        $ gdb grader
-                                        (gdb) print &amp;name
+        $ gdb grader
+        (gdb) print &amp;name
                                         </pre>
 
                                         <p>Place a table in your <code>memorymap</code> file showing the layout of the bss section. The table must have two columns: <em>Address (in hex)</em> and <em>Description</em>. The table must contain one row for each byte in the bss section, that is, one row for each byte of the <code>name</code> array.</p>
@@ -366,12 +353,47 @@
                                       </div>
                           </div>
                     </div>
+                    <div class="col col-md-4">
+                        <div class="todolist not-done">
+                            <div class="h4">To Do</div>
+                               <input type="text" class="form-control add-todo" sortid="1" placeholder="Add todo">
+                                   <button id="checkAll" onclick='AllDone(this)' class="btn btn-success" sortid="1">Mark all as done</button>
+                                   <hr>
+                                   <ul id="sortable1" class="list-unstyled">
+                                   <li class="ui-state-default">
+                                       <div class="checkbox">
+                                           <label>
+                                               <input type="checkbox" value="" /> Complete memory map of the Text section</label>
+                                       </div>
+                                   </li>
+                                   <li class="ui-state-default">
+                                       <div class="checkbox">
+                                           <label>
+                                               <input type="checkbox" value="" /> Complete memory map of the Data section</label>
+                                       </div>
+                                   </li>
+                                   <li class="ui-state-default">
+                                        <div class="checkbox">
+                                            <label>
+                                                <input type="checkbox" value="" /> Complete memory map of the BSS section</label>
+                                        </div>
+                                    </li>
+                                   <li class="ui-state-default">
+                                       <div class="checkbox">
+                                           <label>
+                                               <input type="checkbox" value="" /> Complete memory map of the Stack section</label>
+                                       </div>
+                                   </li>
+                               </ul>
+                        </div>
+                    </div>   
                 </div>
        </div>
        <div class="tab-pane fade" id="step4">
          <div class="row">
-             <div class="col-md-12">
+             <div class="col-md-8">
                     <div class="h4">Instructions</div>
+                    <p><b>Note: It is highly recommend you complete this step (and the whole assignment, in general) with your partner, if you have one.</b></p>
                     <p>Compose a C program named <code>createdataB.c</code> that produces a file named <code>dataB</code>, as short and simple as possible, that causes the <code>grader</code> program to write your name and recommend a grade of "B". You can see by reading the program that, if your name is Andrew Appel, that's very easy to do. But that's not easy to do if your name isn't Andrew Appel! To receive full credit the <code>dataB</code> file must cause the <code>grader</code> program to generate output whose format is indistinguishable from normal output.</p>
 
                     <p>The <code>createdataB.c</code> program must write to the <code>dataB</code> file; it must not write to <code>stdout</code>.</p>
@@ -389,7 +411,7 @@
                     
                     <li><p><em>Local</em> comments, that is, comments throughout your program that thoroughly describe the bytes that the program writes to the <code>dataB</code> file.</p></li>
                     </ul>
-                    
+                
                     <blockquote>
                     <div style="padding:10px;border:5px solid green;">It is acceptable to use "magic numbers" throughout your <code>createdataB.c</code> file.
                     </div>
@@ -406,21 +428,72 @@
                     </div>
                     </blockquote>
              </div>
+             <div class="col col-md-4">
+                <div class="todolist not-done">
+                    <div class="h4">To Do</div>
+                       <input type="text" class="form-control add-todo" sortid="2" placeholder="Add todo">
+                           <button id="checkAll" onclick='AllDone(this)' class="btn btn-success" sortid="2">Mark all as done</button>
+                           <hr>
+                           <ul id="sortable1" class="list-unstyled">
+                           <li class="ui-state-default">
+                               <div class="checkbox">
+                                   <label>
+                                       <input type="checkbox" value="" /> Figure out what <code>dataB</code> should contain</label>
+                               </div>
+                           </li>
+                           <li class="ui-state-default">
+                               <div class="checkbox">
+                                   <label>
+                                       <input type="checkbox" value="" /> Compose <code>createdataB.c</code> and run</label>
+                               </div>
+                           </li>
+                           <li class="ui-state-default">
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" value="" /> Use <code>xxd</code> command in terminal to check if the content of <code>dataB</code> are what you want it to be</label>
+                                </div>
+                            </li>
+                       </ul>
+                </div>
+            </div>   
          </div>
        </div>
        <div class="tab-pane fade" id="step5">
          <div class="row">
-             <div class="col col-md-12">
+             <div class="col col-md-8">
                  <div class="h4">Instructions</div>
                     <p>The given <code>miniassembler.h</code> interface file declares four functions that generate machine language instructions. Comments in the file describe the functions. The given <code>miniassembler.c</code> implementation file defines one of those functions. Define the other three, thus completing the <code>miniassembler.c</code> implementation file.</p>
 
                     <p>The given <code>testminiassembler.c</code> file tests the <code>MiniAssembler</code> module. Use the MiniAssembler module and <code>testminiassembler.c</code> to build a program named <code>miniassembler</code>. Run the program, and compare its output to the given <code>testminiassembler.out</code> file to make sure the function definitions in your MiniAssembler module are correct.</p>
+                    <p><b>Helpful Tip: </b><code>testminiassembler.c</code> is a pretty comprehensive tester, and if you pass its test, it means that your functions work as intended.</p>
              </div>
+             <div class="col col-md-4">
+                <div class="todolist not-done">
+                    <div class="h4">To Do</div>
+                       <input type="text" class="form-control add-todo" sortid="3" placeholder="Add todo">
+                           <button id="checkAll" onclick='AllDone(this)' class="btn btn-success" sortid="3">Mark all as done</button>
+                           <hr>
+                           <ul id="sortable1" class="list-unstyled">
+                           <li class="ui-state-default">
+                               <div class="checkbox">
+                                   <label>
+                                       <input type="checkbox" value="" /> Write the other three functions detailed in <code>miniassembler.h</code></label>
+                               </div>
+                           </li>
+                           <li class="ui-state-default">
+                               <div class="checkbox">
+                                   <label>
+                                       <input type="checkbox" value="" /> Test the functions you've written using <code>testminiassembler.c</code></label>
+                               </div>
+                           </li>
+                       </ul>
+                </div>
+            </div>   
          </div>
        </div>
         <div class="tab-pane fade" id="step6">
          <div class="row">
-             <div class="col-md-12">
+             <div class="col-md-8">
                     <div class="h4">Instructions</div>
                     <p>Compose a C program named <code>createdataA.c</code> that produces a file named <code>dataA</code>, as short and simple as possible, that causes the <code>grader</code> program to write your name and recommend a grade of "A". To receive full credit the <code>dataA</code> file must cause the <code>grader</code> program to generate output whose format is indistinguishable from normal output. Your program must call the four functions that are declared in <code>miniassembler.h</code>.<p>
 
@@ -456,6 +529,34 @@
                             </div>
                             </blockquote>
              </div>
+             <div class="col col-md-4">
+                <div class="todolist not-done">
+                    <div class="h4">To Do</div>
+                       <input type="text" class="form-control add-todo" sortid="4" placeholder="Add todo">
+                           <button id="checkAll" onclick='AllDone(this)' class="btn btn-success" sortid="4">Mark all as done</button>
+                           <hr>
+                           <ul id="sortable1" class="list-unstyled">
+                           <li class="ui-state-default">
+                               <div class="checkbox">
+                                   <label>
+                                       <input type="checkbox" value="" /> Figure out what <code>dataB</code> should contain</label>
+                               </div>
+                           </li>
+                           <li class="ui-state-default">
+                               <div class="checkbox">
+                                   <label>
+                                       <input type="checkbox" value="" /> Compose <code>createdataB.c</code> and run</label>
+                               </div>
+                           </li>
+                           <li class="ui-state-default">
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" value="" /> Use <code>xxd</code> command in terminal to check if the content of <code>dataB</code> are what you want it to be</label>
+                                </div>
+                            </li>
+                       </ul>
+                </div>
+            </div> 
          </div>
        </div>
        <div class="tab-pane fade" id="step7">
@@ -479,6 +580,7 @@
 
                     <li><p><em>Local</em> comments, that is, comments throughout your program that thoroughly describe the bytes that the program writes to the <code>dataAplus</code> file.</p></li>
                     </ul>
+                    <p><b>The "A+" attack (as defined below) is the challenge part of this assignment. While doing the challenge part of the assignment, you are bound to observe the course policies regarding assignment conduct as given in the course Policies web page, plus one additional policy: you may not use any "human" sources of information. That is, you may not consult with the course's staff members, the lab teaching assistants, other current students via Piazza, or any other people while working on the challenge part of an assignment, except for clarification of requirements. However you may consult with your teammate, with no limitations.</b></p>
 
                     <blockquote>
                     <div style="padding:10px;border:5px solid green;">It is acceptable to use "magic numbers" throughout your <code>createdataAplus.c</code> file.
@@ -534,6 +636,13 @@
  </div>
 {% endblock %}
 {% block extrajs %}
-<script src="/../static/js/todo.js"></script>
+<script
+  src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"
+  integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU="
+  crossorigin="anonymous"></script>
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script> -->
 <script src="/../static/js/wizard.js"></script>
+<script src="/../static/js/todo.js"></script>
+<script src="/../static/js/addpartner.js"></script>
+<script src="/../static/js/popover.js"></script>
 {% endblock %}

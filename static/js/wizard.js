@@ -34,6 +34,7 @@ $('.prev').click(function(){
     // console.log(step);
     var weight = $(this).attr('weight');
     var steps = $(this).attr('num-steps');
+
     $('.progress-bar').css({width: weight + '%'});
     $('.progress-bar').text("Step " + step + " of " + steps + ": " + weight + "%");
     

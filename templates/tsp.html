@@ -9,28 +9,29 @@
             <h3 class="mt-4">COS 126: Travelling Salesperson</h3>
         </div>
         <div class="col col-md-2">
-            <button class="btn btn-primary mt-4" onclick="location.reload()">Update Page</button>
+            <button class="btn btn-primary mt-4" data-toggle="popover" data-trigger="hover" data-content="If you and your partner are working together on different screens, click to update your screen to your partner's." onclick="location.reload()">Update Page</button>
         </div>
     </div>
     
     <hr>
     <div class="progress">
       <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="6" style="width: 0%;">
-        Step 0 of 6
+        Step 0 of 8
       </div>
     </div>
    
     <div class="navbar mt-2">
        <div class="navbar-inner">
              <ul class="nav nav-pills">
-                <li class="active"><a class="nav-link active" weight="10" href="#step0" num-steps="6" data-toggle="tab" data-step="0">Context</a></li>
-                <li class="nav-item"><a class="nav-link autosave" weight="15" href="#step1"  num-steps="6"  data-toggle="tab" data-step="0">Setup</a></li>
-                <li class="nav-item"><a class="nav-link autosave" weight="25" href="#step2"  num-steps="6" data-toggle="tab" data-step="1">Step 1</a></li>
-                <li class="nav-item"><a class="nav-link autosave" weight="40" href="#step3"  num-steps="6" data-toggle="tab" data-step="2">Step 2</a></li>
-                <li class="nav-item"><a class="nav-link autosave" weight="50" href="#step4"  num-steps="6" data-toggle="tab" data-step="3">Step 3</a></li>
-                <li class="nav-item"><a class="nav-link autosave" weight="80" href="#step5"  num-steps="6" data-toggle="tab" data-step="4" class="bg-danger">Step 4</a></li>
-                <li class="nav-item"><a class="nav-link autosave" weight="95" href="#step6"  num-steps="6" data-toggle="tab" data-step="5">Step 5</a></li>
-                <li class="nav-item"><a class="nav-link autosave" weight="100" href="#step7"  num-steps="6" data-toggle="tab" data-step="6">Wrapping Up</a></li>
+                <li class="active"><a class="nav-link active" weight="10" href="#step0" num-steps="8" data-toggle="tab" data-step="0">Context</a></li>
+                <li class="nav-item"><a class="nav-link autosave" weight="15" href="#step1"  num-steps="8"  data-toggle="tab" data-step="1">Setup</a></li>
+                <li class="nav-item"><a class="nav-link autosave" weight="25" href="#step2"  num-steps="8" data-toggle="tab" data-step="2">Step 1</a></li>
+                <li class="nav-item"><a class="nav-link autosave" weight="40" href="#step3"  num-steps="8" data-toggle="tab" data-step="3">Step 2</a></li>
+                <li class="nav-item"><a class="nav-link autosave" weight="50" href="#step4"  num-steps="8" data-toggle="tab" data-step="4">Step 3</a></li>
+                <li class="nav-item"><a class="nav-link autosave" weight="80" href="#step5"  num-steps="8" data-toggle="tab" data-step="5" class="bg-danger">Step 4</a></li>
+                <li class="nav-item"><a class="nav-link autosave" weight="90" href="#step6"  num-steps="8" data-toggle="tab" data-step="6">Step 5</a></li>
+                <li class="nav-item"><a class="nav-link autosave" weight="95" href="#step7"  num-steps="8" data-toggle="tab" data-step="7">Step 6</a></li>
+                <li class="nav-item"><a class="nav-link autosave" weight="100" href="#step8"  num-steps="8" data-toggle="tab" data-step="8">Wrapping Up</a></li>
              </ul>
        </div>
     </div>
@@ -72,17 +73,23 @@
             <div class="row mt-4">
                     <div class="col col-md-8">
                         <div class="h4">Partner Setup</div>
+                            <!-- {% if err %}
+                                <div class="alert alert-danger">
+                                    {{err}}
+                                </div>
+                            {% endif %} -->
+                            <div class="adderror"></div>
                             <div class="form">
-                                <label class="font-weight-bold mt-2">Partner: {{partner}}</label>
+                                <label id="partnername" class="font-weight-bold mt-2">Partner: {{partner}}</label>
                                 <br>
                                 <label class="mt-2">Add Partner</label> 
-                                <form action='/addpartner' method='post'>
-                                <div class="input-group mb-3">
-                                    <input name="netid" type="text" class="form-control" placeholder="Partner's netid" aria-label="Partner's netid" aria-describedby="basic-addon2">
-                                    <div class="input-group-append">
-                                        <button class="btn btn-outline-secondary" id="instance" name="instance_id" value="{{instance.instance_id}}" action="submit">Add</button>
+                                <form id="addpartner" onsubmit="addpartner()">
+                                    <div class="input-group mb-3">
+                                        <input name="netid" type="text" class="form-control" placeholder="Partner's netid" aria-label="Partner's netid" aria-describedby="basic-addon2">
+                                        <div class="input-group-append">
+                                            <button class="btn btn-outline-secondary" id="instance" name="instance_id" value="{{instance.instance_id}}" action="submit">Add</button>
+                                        </div>
                                     </div>
-                                </div>
                                 </form>
                             </div>
                         <div class="h4 mt-4">Procedure</div>
@@ -107,25 +114,25 @@ public String <b>toString()</b>                 <span class="comment">// returns
                                    <li class="ui-state-default">
                                        <div class="checkbox">
                                            <label>
-                                               <input type="checkbox" value="" /> Review the CircularQuote exercise from precept. Focus on understanding circularly linked lists and the do {...} while (...) loop to traverse them.</label>
+                                               <input type="checkbox" value="" /> Review the CircularQuote exercise from precept. Focus on understanding circularly linked lists and the do {...} while (...) loop to traverse them</label>
                                        </div>
                                    </li>
                                    <li class="ui-state-default">
                                        <div class="checkbox">
                                            <label>
-                                               <input type="checkbox" value="" /> Download and extract the .zip file mentioned on the assignment page.</label>
+                                               <input type="checkbox" value="" /> Download and extract the .zip file mentioned on the assignment page</label>
                                        </div>
                                    </li>
                                    <li class="ui-state-default">
                                         <div class="checkbox">
                                             <label>
-                                                <input type="checkbox" value="" /> Save Tour.java in the same directory.</label>
+                                                <input type="checkbox" value="" /> Save Tour.java in the same directory</label>
                                         </div>
                                     </li>
                                    <li class="ui-state-default">
                                        <div class="checkbox">
                                            <label>
-                                               <input type="checkbox" value="" /> Study the <a href="https://www.cs.princeton.edu/courses/archive/fall19/cos126/assignments/tsp/tsp/Point.java">Point </a>API.</label>
+                                               <input type="checkbox" value="" /> Study the <a target="_blank" href="https://www.cs.princeton.edu/courses/archive/fall19/cos126/assignments/tsp/tsp/Point.java">Point </a>API</label>
                                        </div>
                                    </li>
                                </ul>
@@ -178,19 +185,19 @@ public String <b>toString()</b>                 <span class="comment">// returns
                                     <li class="ui-state-default">
                                         <div class="checkbox">
                                             <label>
-                                                <input type="checkbox" value="" /> Include one instance variable, say first, of type Node that is a reference to the "first" node of the circularly linked list.</label>
+                                                <input type="checkbox" value="" /> Include one instance variable, say first, of type Node that is a reference to the "first" node of the circularly linked list</label>
                                         </div>
                                     </li>
                                     <li class="ui-state-default">
                                             <div class="checkbox">
                                                 <label>
-                                                    <input type="checkbox" value="" /> Write the Tour() constructor.</label>
+                                                    <input type="checkbox" value="" /> Write the Tour() constructor</label>
                                             </div>
                                     </li>
                                     <li class="ui-state-default">
                                             <div class="checkbox">
                                                 <label>
-                                                    <input type="checkbox" value="" /> Write the Tour(Point a, Point b, Point c, Point d) constructor by creating four Node objects, assigning one point to each, and linking the nodes to one another in a circular manner.</label>
+                                                    <input type="checkbox" value="" /> Write the Tour(Point a, Point b, Point c, Point d) constructor by creating four Node objects, assigning one point to each, and linking the nodes to one another in a circular manner</label>
                                             </div>
                                     </li>
                                 </ul>
@@ -270,25 +277,25 @@ public String <b>toString()</b>                 <span class="comment">// returns
                                 <li class="ui-state-default">
                                         <div class="checkbox">
                                             <label>
-                                                <input type="checkbox" value="" /> Implement the size() method.</label>
+                                                <input type="checkbox" value="" /> Implement the <code>size()</code> method</label>
                                         </div>
                                 </li>
                                 <li class="ui-state-default">
                                         <div class="checkbox">
                                             <label>
-                                                <input type="checkbox" value="" /> Test the size() method.</label>
+                                                <input type="checkbox" value="" /> Test the <code>size()</code> method</label>
                                         </div>
                                 </li>
                                 <li class="ui-state-default">
                                         <div class="checkbox">
                                             <label>
-                                                <input type="checkbox" value="" /> Implement the length() method.</label>
+                                                <input type="checkbox" value="" /> Implement the <code>length()</code> method</label>
                                         </div>
                                 </li>
                                 <li class="ui-state-default">
                                         <div class="checkbox">
                                             <label>
-                                                <input type="checkbox" value="" /> Test the length() method.</label>
+                                                <input type="checkbox" value="" /> Test the <code>length()</code> method</label>
                                         </div>
                                 </li>
                             </ul>
@@ -367,64 +374,27 @@ public String <b>toString()</b>                 <span class="comment">// returns
                                     <li class="ui-state-default">
                                             <div class="checkbox">
                                                 <label>
-                                                    <input type="checkbox" value="" /> Implement the toString() method</label>
+                                                    <input type="checkbox" value="" /> Implement the <code>toString()</code> method</label>
                                             </div>
                                     </li>
                                     <li class="ui-state-default">
                                             <div class="checkbox">
                                                 <label>
-                                                    <input type="checkbox" value="" /> Test the toString() method</label>
+                                                    <input type="checkbox" value="" /> Test the <code>toString()</code> method</label>
                                             </div>
                                     </li>
                                     <li class="ui-state-default">
                                             <div class="checkbox">
                                                 <label>
-                                                    <input type="checkbox" value="" /> Implement the draw() method</label>
+                                                    <input type="checkbox" value="" /> Implement the <code>draw()</code> method</label>
                                             </div>
                                     </li>
                                     <li class="ui-state-default">
                                             <div class="checkbox">
                                                 <label>
-                                                    <input type="checkbox" value="" /> Test the draw() method</label>
+                                                    <input type="checkbox" value="" /> Test the <code>draw()</code> method</label>
                                             </div>
                                     </li>
-                                    
-                                    <!-- <li class="ui-state-default">
-                                            <div class="checkbox">
-                                                <label>
-                                                    <input type="checkbox" value="" /> Implement the size method.</label>
-                                            </div>
-                                        </li>
-                                        <li class="ui-state-default">
-                                            <div class="checkbox">
-                                                <label>
-                                                    <input type="checkbox" value="" /> Write a main() method that defines four points, constructs a new Tour object using those four points, and calls its size() method to test size()</label>
-                                            </div>
-                                        </li>
-                                        <li class="ui-state-default">
-                                            <div class="checkbox">
-                                                <label>
-                                                    <input type="checkbox" value="" /> Implement length()</label>
-                                            </div>
-                                        </li>
-                                        <li class="ui-state-default">
-                                            <div class="checkbox">
-                                                <label>
-                                                    <input type="checkbox" value="" /> Implement toString()</label>
-                                            </div>
-                                        </li>
-                                        <li class="ui-state-default">
-                                            <div class="checkbox">
-                                                <label>
-                                                    <input type="checkbox" value="" /> Implement insertNearest()</label>
-                                            </div>
-                                        </li>
-                                        <li class="ui-state-default">
-                                            <div class="checkbox">
-                                                <label>
-                                                    <input type="checkbox" value="" /> Implement insertSmallest()</label>
-                                            </div>
-                                        </li>     -->
                                 </ul>
                         </div>
                 </div>
@@ -557,7 +527,13 @@ Tour length = 1566.1363051360363
                                             <li class="ui-state-default">
                                                     <div class="checkbox">
                                                         <label>
-                                                            <input type="checkbox" value="" /> Implement the insertNearest() method.</label>
+                                                            <input type="checkbox" value="" /> Implement the <code>insertNearest()</code> method</label>
+                                                    </div>
+                                            </li>
+                                            <li class="ui-state-default">
+                                                    <div class="checkbox">
+                                                        <label>
+                                                            <input type="checkbox" value="" /> Test the <code>insertNearest()</code> method</label>
                                                     </div>
                                             </li>
                            </div>
@@ -572,7 +548,9 @@ Tour length = 1566.1363051360363
                     <div class="h4">Instructions: Implement insertSmallest()</div>
                     <p>
                         After doing the nearest insertion heuristic, you should be able write the <code>insertSmallest()</code> method by yourself, without any hints. 
-                        The only difference is that you want to insert the point p where it will result in the least possible increase in the total tour length.
+                        The only difference is that you want to insert the point p where it will result in the least possible increase in the total tour length. </p>
+                    <p>
+                        <b>Upon completion of <code>insertSmallest()</code>, your should test your <code>Tour</code> program.</b>
                     </p>
                     <div id="accordion">
                             <div class="card">
@@ -587,7 +565,7 @@ Tour length = 1566.1363051360363
                               <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
                                 <div class="card-body">
                                     <p>
-                                        To test insertSmallest(), try inserting various points into a 4-point tour.  Once you have successfully tested on a 4-point 
+                                        To test <code>insertSmallest()</code>, try inserting various points into a 4-point tour.  Once you have successfully tested on a 4-point 
                                         tour, here is the resulting tour which has length 1655.7462. In this case, the smallest insertion heuristic actually does worse than the nearest insertion heuristic (although this is not typical).
                                     </p>
                                     <pre>
@@ -685,9 +663,15 @@ Tour length = 1566.1363051360363
                                         <li class="ui-state-default">
                                             <div class="checkbox">
                                                 <label>
-                                                    <input type="checkbox" value="" /> Implement insertSmallest()</label>
+                                                    <input type="checkbox" value="" /> Implement <code>insertSmallest()</code></label>
                                             </div>
                                         </li>    
+                                        <li class="ui-state-default">
+                                                <div class="checkbox">
+                                                    <label>
+                                                        <input type="checkbox" value="" /> Test the <code>insertSmallest()</code> method</label>
+                                                </div>
+                                        </li>
                                 </ul>
                         </div>
                 </div>
@@ -695,106 +679,127 @@ Tour length = 1566.1363051360363
        </div>
        <div class="tab-pane fade" id="step7">
             <div class="row">
-                    <div class="col-md-12">    
-                        <div class="row">
-                           <div class="col col-md-12">
-                               <div class="h4">Instructions: Input and Testing</div>
-                               <p>
-                                   <strong>Input and testing.</strong>The input format begins with two integers <em>width</em> and <em>height</em>, followed by pairs of <em>x</em>- and <em>y</em>-coordinates. All <em>x</em>-coordinates will be real numbers between 0 and <em>width</em>; all <em>y</em>-coordinates will be real numbers between 0 and <em>height</em>. For example, <a href="tsp/tsp1000.txt">tsp1000.txt</a> contains the following data:</p>
-                                   <pre>% <b>more tsp1000.txt</b>
-                                       800 800
-                                       185.0411 457.8824
-                                       247.5023 299.4322
-                                       701.3532 369.7156
-                                       563.2718 442.3282
-                                       144.5569 576.4812
-                                       535.9311 478.4692
-                                       383.8523 458.4757
-                                       329.9402 740.9576
-                                       ...
-                                       254.9820 302.2548
-                                   </pre>
-                               </p>
-                                   <p>After implementing <tt>Tour.java</tt>, use the client program <a href="tsp/NearestInsertion.java">NearestInsertion.java</a>, which reads the points from standard input; runs the nearest neighbor heuristic; prints the resulting tour, its length, and its number of points to standard output; and draws the resulting tour to standard drawing. <a href="tsp/SmallestInsertion.java">SmallestInsertion.java</a> is analogous but runs the smallest increase heuristic.</p>
-       
-                                           <table style="margin: auto; border-spacing: 15px; border-collapse: separate;">
-       
-                                               <tr>
-                                                   <td>
-                                                       <pre>
-                                   % <b>java-introcs NearestInsertion < tsp1000.txt</b>
-                                   (185.0411, 457.8824)
-                                   (198.3921, 464.6812)
-                                   (195.8296, 456.6559)
-                                   (216.8989, 455.126)
-                                   (213.3513, 468.0186)
-                                   (241.4387, 467.413)
-                                   (259.0682, 473.7961)
-                                   (221.5852, 442.8863)
-                                   ...
-                                   (264.57, 410.328)
-       
-                                   Tour length = 27868.7106
-                                   Number of points = 1000
-                                   </pre> </td>
-                                                   <td>
-                                                       <pre>% <b>java-introcs SmallestInsertion < tsp1000.txt</b>
-                                   (185.0411, 457.8824)
-                                   (195.8296, 456.6559)
-                                   (193.0671, 450.2405)
-                                   (200.7237, 426.3461)
-                                   (200.5698, 422.6481)
-                                   (217.4682, 434.3839)
-                                   (223.1549, 439.8027)
-                                   (221.5852, 442.8863)
-                                   ...
-                                   (186.8032, 449.9557)
-       
-                                   Tour length = 17265.6282
-                                   Number of points = 1000</pre> </td>
-                                               </tr>
-                               </p>
-                           </div>
-                   </div>
-                   <div class="row">
-                    <div class="col col-md-12">
-                        <div class="h4">Instructions: Analysis</div>
-                        <p><b>Analysis.</b> In your <tt>readme.txt</tt>, estimate the running time (in seconds) of your program as a function of the number of points <em>n</em>. You may use the client <a href="tsp/TSPTimer.java">TSPTimer.java</a> help collect data points. (It relies on <a href="http://introcs.cs.princeton.edu/java/stdlib/javadoc/Stopwatch.html">Stopwatch</a>, which is part of <tt>stdlib.jar</tt>.) Run the two heuristics for <em>n</em> = 1,000, and repeatedly double <em>n</em> until the execution time exceeds 60 seconds.</p>
-       
+                <div class="col-md-8">
+                    <div class="h4">Testing</div>
+                    <p><strong>Input.</strong> The files for this assignment include many sample inputs.
+                        <!--There are many sample data files (with extension .txt) available from the
+            <a target="_blank" href="tsp/">tsp directory</a>.-->Most are taken from <a target="_blank" href="http://www.iwr.uni-heidelberg.de/groups/comopt/software/TSPLIB95/index.html">
+            TSPLIB</a>.</p>
+            
+                    <p><strong>Debugging.</strong> A good debugging strategy for most programs is to test your code on inputs that you can easily solve by hand. Start with 1- and 2-point problems. Then, do a 4-point problem. Choose the data so that it is easy to work through the code by hand. Draw pictures. If your code does not do exactly what your hand calculations indicate, determine where they differ. Use the <code>StdOut.println()</code> method to trace.</p>
+            
+                    <p><strong>Checking your work.</strong> For <code>usa13509.txt</code> we get tour lengths of <code>77449.9794</code> and <code>45074.7769</code> for nearest insertion and smallest insertion, respectively. For <code>circuit1290.txt</code> we get <code>25029.7905</code> and <code>14596.0971</code>.</p>
+
+                        <div id="accordion">
+                                <div class="card">
+                                  <div class="card-header" id="headingOne">
+                                    <h5 class="mb-0">
+                                      <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                                            Test with Static Visualizer
+                                      </button>
+                                    </h5>
+                                  </div>
+                              
+                                  <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+                                    <div class="card-body">
+                                            <p>After completing <code>Tour.java</code>, use the client program <a target="_blank" href="https://www.cs.princeton.edu/courses/archive/fall19/cos126/assignments/tsp/tsp/NearestInsertion.java">NearestInsertion.java</a>, 
+                                                which reads the points from standard input; runs the nearest neighbor heuristic; prints the resulting tour, its length, and its number of points to standard output; and draws the resulting tour to standard drawing. 
+                                                <a target="_blank" href="https://www.cs.princeton.edu/courses/archive/fall19/cos126/assignments/tsp/tsp/SmallestInsertion.java">SmallestInsertion.java</a> is analogous but runs the smallest increase heuristic.
+                                            </p>
+                                            <p>
+                                                    You can try running NearestInsertion.java and SmallestInsertion.java with <code>tsp1000.txt</code>, shown below, as input. The first line of <code>tsp1000.txt</code> contains two integers <em>width</em> and <em>height</em>, followed by pairs of <em>x</em>- and <em>y</em>-coordinates. 
+                                                    All <em>x</em>-coordinates will be real numbers between 0 and <em>width</em>; all <em>y</em>-coordinates will be real numbers between 0 and <em>height</em>. 
+                                            </p>
+                                            <img src="../static/images/statictsp.png">
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="card">
+                                    <div class="card-header" id="headingTwo">
+                                        <h5 class="mb-0">
+                                        <button class="btn btn-link" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                            Test with Interactive Visualizer
+                                        </button>
+                                        </h5>
+                                    </div>
+                                
+                                    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+                                        <div class="card-body">
+                                            <p>
+                                                TSPVisualizer.java in an interactive TSP visualizer. When you click a point in the window, it will add it to your tour. It displays both the nearest neighbor heuristic tour (in red) and the smallest 
+                                                insertion heuristic (in blue). You can toggle the visibility of the two tours by typing n (for nearest neighbor) or s (for smallest insertion). Run it with <code>% java-introcs TSPVisualizer tsp1000.txt</code>
+                                            </p>
+                                            <img class="w-100" src="../static/images/dynamictsp.png">
+                                        </div>
+                                    </div>
+                                </div>
+                        </div>
+                       
+                </div>
+                <div class="col-md-4">
+                    <div class="todolist not-done">
+                                <div class="h4">To Do</div>
+                                <input type="text" class="form-control add-todo" sortid="7" placeholder="Add todo">
+                                    <button id="checkAll" onclick="AllDone(this)" class="btn btn-success" sortid="7">Mark all as done</button>
+                                    
+                                    <hr>
+                                    <ul id="sortable6" class="list-unstyled">
+                                        <li class="ui-state-default">
+                                                <div class="checkbox">
+                                                    <label>
+                                                        <input type="checkbox" value="" /> Test your <code>Tour</code> program with the static visualizer</label>
+                                                </div>
+                                        </li>
+                                        <li class="ui-state-default">
+                                                <div class="checkbox">
+                                                    <label>
+                                                        <input type="checkbox" value="" /> Test your <code>Tour</code> program with <code>interactive visualizer</code></label>
+                                                </div>
+                                        </li>
+                                </ul>
                     </div>
                 </div>
-                           
-                    </div>
-                </div>
+            </div>
         </div>
         <div class="tab-pane fade" id="step8">
                 <div class="row">
-                    <div class="col-md-12">
-                        <div class="h4">Instructions</div>
-                        <p>Edit your copy of the given <code>readme</code> file by answering each question that is expressed therein.</p>
-                        <p>One of the sections of the <code>readme</code> file requires you to list the authorized sources of information that you used to complete the assignment. Another section requires you to list the <em>unauthorized</em> sources of information that you used to complete the assignment. Your grader will not grade your submission unless you have completed those sections. To complete the "authorized sources" section of your <code>readme</code> file, copy the list of authorized sources given in the <em>Policies</em> web page to that section, and edit it as appropriate.</p>
-
-                        <p>Provide the instructors with your feedback on the assignment. To do that, issue this command:</p>
-
-                        <blockquote>
-                        <pre>
-                        FeedbackCOS217.py 5
-                        </pre>
-                        </blockquote>
-
-                        <p>and answer the questions that it asks. (When answering the numeric questions, please enter the average of the responses that you and your teammate would provide individually.) That command stores its questions and your answers in a file named <code>feedback</code> in your working directory.</p>
-
-                        <p>Submit your work electronically on armlab. If you worked with a teammate, then one of the teammates must submit all of your team's files, and the other teammate must submit none of your team's files. Your <code>readme</code> file, your <code>memorymap</code> file, and your source code files must contain both your name and your teammate's name. Use these commands to submit:</p>
-
-                        <blockquote>
-                        <pre>
-                        submit 5 createdataB.c 
-                        submit 5 miniassembler.h miniassembler.c
-                        submit 5 createdataA.c
-                        submit 5 createdataAplus.c
-                        submit 5 memorymap readme feedback
-                        </pre>
-                        </blockquote>
+                    <div class="col-md-8">
+                        <div class="h4">Wrapping Up</div>
+                            <p>In your <code>readme.txt</code>, estimate the running time (in seconds) of your program as a function of the number of points <em>n</em>.
+                                You may use the client <a target="_blank" href="https://www.cs.princeton.edu/courses/archive/fall19/cos126/assignments/tsp/tsp/TSPTimer.java">TSPTimer.java</a> 
+                                help collect data points. (It relies on <a target="_blank" href="http://introcs.cs.princeton.edu/java/stdlib/javadoc/Stopwatch.html">Stopwatch</a>, which is part of <code>stdlib.jar</code>.) 
+                                It takes a command-line argument <em>n</em>, runs the two heuristics on a random input of size <em>n</em>, and prints how long each took.
+                                Run the two heuristics for <em>n</em> = 1,000, and repeatedly double <em>n</em> until the execution time exceeds 60 seconds.</p>
+                            <pre>
+                % <b>java-introcs -Xint TSPTimer 1000</b>
+                Tour length = 26338.42949015926
+                Nearest insertion:  0.056 seconds
+                
+                Tour length = 15505.745750759515
+                Smallest insertion:  0.154 seconds
+                            </pre>
+                    </div>
+                    <div class="col col-md-4">
+                        <div class="todolist not-done">
+                                    <div class="h4">To Do</div>
+                                    <input type="text" class="form-control add-todo" sortid="8" placeholder="Add todo">
+                                        <button id="checkAll" onclick="AllDone(this)" class="btn btn-success" sortid="8">Mark all as done</button>
+                                        <hr>
+                                        <ul id="sortable6" class="list-unstyled">
+                                            <li class="ui-state-default">
+                                                    <div class="checkbox">
+                                                        <label>
+                                                            <input type="checkbox" value="" /> Run and record <code>insertNearest</code> heuristics</label>
+                                                    </div>
+                                            </li>
+                                            <li class="ui-state-default">
+                                                    <div class="checkbox">
+                                                        <label>
+                                                            <input type="checkbox" value="" /> Run and record <code>insertSmallest</code> heuristics</code></label>
+                                                    </div>
+                                            </li>
+                                    </ul>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -806,6 +811,9 @@ Tour length = 1566.1363051360363
   src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"
   integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU="
   crossorigin="anonymous"></script>
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script> -->
 <script src="/../static/js/wizard.js"></script>
 <script src="/../static/js/todo.js"></script>
+<script src="/../static/js/addpartner.js"></script>
+<script src="/../static/js/popover.js"></script>
 {% endblock %}

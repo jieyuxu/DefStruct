@@ -16,9 +16,10 @@ $('.add-todo').on('keypress',function (e) {
       e.preventDefault
       if (e.which == 13) {
            if($(this).val() != ''){
-           var todo = $(this).val();
-           var id = $(this).attr('sort-id');
-           console.log("id " + id);
+            console.log(this);
+            var todo = $(this).val();
+            var id = $(this).attr('sortid');
+            console.log("id " + id);
             createTodo(todo, id); 
             countTodos();
            }else{
@@ -64,7 +65,7 @@ function countTodos(){
 //create task
 function createTodo(text, id){
     var markup = '<li class="ui-state-default"><div class="checkbox"><label><input type="checkbox" value="" /> '+ text +'</label></div></li>';
-    console.log("sort id " + id);
+    console.log("createtodo sort id " + id);
     $('#sortable' + id).append(markup);
     $('.add-todo').val('');
     autosave();
@@ -114,7 +115,6 @@ function autosave(){
      var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
      var dateTime = date + ' '+ time;
      $('#updateTime').html(dateTime);
-     console.log(instance_id);
      $.ajax({
          url: '/savedata',
          type: 'post',
@@ -124,21 +124,4 @@ function autosave(){
             console.log('ok')
          }
      });
-}
-
-function update() {
-    var instance_id = $("#instance").attr('value');
-    $.ajax({
-        url: '/updatepage',
-        type: 'post',
-        contentType: 'application/json',
-        data: JSON.stringify({'instance': instance_id}),
-        success: function(data) {
-            console.log(data)
-            var newDoc = document.open("text/html", "replace");
-            newDoc.write(data);
-            newDoc.close();
-            console.log('ok 2');
-        }
-    });
 }

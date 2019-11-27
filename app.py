@@ -18,7 +18,9 @@ from flask_sqlalchemy_session import flask_scoped_session
 import os
 
 app = Flask(__name__)
-app.secret_key = 'kdshkjsdhskdjfhsdkjsdfkjsdkjh'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['DATABASE_URL']
+app.secret_key = "b'5\x99\xc0]\xbe\xbfq|\xc6vR\xa6\xc9&\x1cV\x00\xf0\xb5\xa9\xa7\xb9H\x8b'"
 
 db = SQLAlchemy(app)
 sess = flask_scoped_session(session_factory, app)
@@ -26,17 +28,24 @@ sess = flask_scoped_session(session_factory, app)
 cas = CAS(app)
 app.config['CAS_SERVER'] = "https://fed.princeton.edu/cas/login"
 app.config['CAS_AFTER_LOGIN'] = 'reroute'
-# app.config['CAS_AFTER_LOGOUT'] = 'http://localhost:5000/relogout'
-app.config['CAS_AFTER_LOGOUT'] = 'https://defstruct.herokuapp.com/relogout'
+app.config['CAS_AFTER_LOGOUT'] = 'http://localhost:5000/relogout'
+# app.config['CAS_AFTER_LOGOUT'] = 'https://defstruct.herokuapp.com/relogout'
 app.config['CAS_LOGIN_ROUTE'] = '/cas'
 
-app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['DATABASE_URL']
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
+# app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['DATABASE_URL']
+
 #-----------------------------------------------------------------------
 
-@app.route('/testtemplate')
-def test():
+@app.route('/testtemplate1')
+@login_required
+def test1():
     instance = getTempInstance(3)
+    return render_template('bufferoverrun.html', instance=instance)
+
+@app.route('/testtemplate2')
+@login_required
+def test():
+    instance = getTempInstance(4)
     return render_template('tsp.html', instance=instance)
 
 
@@ -56,11 +65,13 @@ def profile():
         sentRequests = getSentRequests(session['username'])
         awaitingRequests = getAwaitingRequests(session['username'])
         return render_template("profile.html", loggedin=isLoggedIn(), allInstances=allInstances, sentRequests=sentRequests, awaitingRequests=awaitingRequests)
-    return redirect(url_for('cas.login'))
+    return redirect(url_for('index'))
 
 @app.route('/testtemplate')
+@login_required
 def testtemplate():
     return render_template('tsp.html', loggedin=isLoggedIn())
+
 @app.route('/reroute')
 def reroute():
     print(app.config['CAS_USERNAME_SESSION_KEY'])
@@ -75,6 +86,7 @@ def reroute():
     return redirect(url_for('login'))
 
 @app.route('/relogout')
+@login_required
 def relogout():
     session.pop('username')
     return redirect(url_for('index'))
@@ -103,29 +115,29 @@ def addtemplate():
     
 
 @app.route('/deletetemplate', methods=['GET'])
+@login_required
 def deletetemplate():
     inst_id = request.args.get('instance_id')
     print(inst_id)
     return redirect('/profile')
     
 @app.route('/edittemplate')
+@login_required
 def edittemplate():
     if isLoggedIn() and request.method == 'GET':
         if 'instance_id' in request.args: 
             inst_id = request.args['instance_id']
             instance = getTempInstance(inst_id)
-            print(instance)
             partner = instance.partner_id
             if partner != "" and session['username'] != instance.owner_id:
                 partner = instance.owner_id
-            print('current saved state')
-            print(instance.savedState)
             if 'date' in request.args:
                 return render_template_string(instance.savedState, instance=instance, partner=partner, loggedin=isLoggedIn(), date=datetime.now()) 
             return render_template_string(instance.savedState, instance=instance, partner=partner, loggedin=isLoggedIn()) 
     return redirect(url_for('cas.login'))
     
 @app.route('/handleAwaitingRequest', methods=['POST'])
+@login_required
 def handleAwaitingRequest():
     if request.method == 'POST':
         if 'accept' in request.form:
@@ -145,7 +157,8 @@ def handleAwaitingRequest():
                 print("deletion error")
     return redirect(url_for('profile'))
 
-@app.route('/cancelRequest', methods=['POST'])
+@app.route('/cancelRequest', methods=['POST', 'GET'])
+@login_required
 def cancelRequest():
     if request.method == 'POST':
         formdata = request.form
@@ -155,7 +168,8 @@ def cancelRequest():
         #     print(key, val)
     return redirect(url_for('profile'))
 
-@app.route('/handleinstance', methods=['POST'])
+@app.route('/handleinstance', methods=['POST', 'GET'])
+@login_required
 def handleinstance():
     if request.method == 'POST':
         if 'edit' in request.form:
@@ -167,26 +181,36 @@ def handleinstance():
                 print("serious error happened in handle instance")
     return redirect(url_for('profile'))
 
-@app.route('/addpartner', methods=['POST'])
+@app.route('/addpartner', methods=['POST', 'GET'])
+@login_required
 def addpartner():
     if isLoggedIn() and request.method == 'POST':
-        partner = request.form['netid']
-        instance_id = request.form['instance_id']
-        if (partner == session['username']):
-            print('cannot be partners with yourself')
-        if not containsUser(partner):
-            print('user not in system')
-        
-        req = addNewRequest(session['username'], partner)
-        instance = setRequest(instance_id, req.request_id)
-        # print(instance.request)
-        # print(instance.partner_id)
-        # print(req)
-        html = instance.savedState
-        return render_template_string(html, instance=instance.instance_id, partner=instance.partner_id)        
+        if request.is_json:
+            content = request.get_json()
+            partner = content['netid']
+            instance_id= content['instance']
+            print(partner)
+            print(instance_id)
+            error = ""
+            if (partner == session['username']):
+                error = 'You cannot be partners with yourself.'
+                return error
+            if not containsUser(partner):
+                error = 'This user not in the system. Please have them register.'
+                return error
+            
+            req = addNewRequest(session['username'], partner, instance_id)
+            if req != None:
+                setRequest(instance_id, req.request_id)
+                return ""
+            else:
+                error = 'There is already an existing request. Please cancel it before sending a new one.'
+                return error
+        # return render_template_string(html, instance=instance.instance_id, partner=instance.partner_id)        
     return redirect(url_for('profile'))
 
-@app.route('/savedata', methods=['POST'])
+@app.route('/savedata', methods=['POST', 'GET'])
+@login_required
 def savedata():
     if isLoggedIn() and request.method == 'POST':
         if request.is_json:
@@ -196,14 +220,15 @@ def savedata():
             updateState(instance_id, html)
             return content['newstate']
 
-@app.route('/updatepage', methods=['POST'])
-def update():
-    if isLoggedIn() and request.method == 'POST':
-        if request.is_json:
-            content = request.get_json()
-            instance_id = content['instance']
-            state = getState(instance_id)
-            return state
+# @app.route('/updatepage', methods=['POST'])
+# @login_required
+# def update():
+#     if isLoggedIn() and request.method == 'POST':
+#         if request.is_json:
+#             content = request.get_json()
+#             instance_id = content['instance']
+#             state = getState(instance_id)
+#             return state
 
 #-----------------------------------------------------------------------
 def isLoggedIn():
