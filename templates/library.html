@@ -16,9 +16,10 @@
     <div class="row mt-4">
         <div class="h3 pl-2">All Templates</div>
     </div>
-    <div class="row">
+    <div class="row pl-2">
         <p>You can find all the available templates here. To use a template, simply click add on your template(s) of interest.</p>
     </div>
+    <hr>
     <div class="card-deck">
         {% for template in templates %}
         <form method="post" action="/addtemplate">
@@ -27,7 +28,7 @@
                     <h5 class="card-title">{{template.name}}</h5>
                 </div>
                 <div class="card-footer">
-                        <button class="btn btn-primary" action="submit" name="template_id" value={{template.temp_id}}>Add</button>
+                        <button class="btn btn-primary float-right" action="submit" name="template_id" value={{template.temp_id}}>Add Template</button>
                 </div>
             </div>
         </form>
