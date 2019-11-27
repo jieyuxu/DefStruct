@@ -20,6 +20,7 @@ import os
 app = Flask(__name__)
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['DATABASE_URL']
+
 app.secret_key = "b'5\x99\xc0]\xbe\xbfq|\xc6vR\xa6\xc9&\x1cV\x00\xf0\xb5\xa9\xa7\xb9H\x8b'"
 
 db = SQLAlchemy(app)
@@ -31,9 +32,6 @@ app.config['CAS_AFTER_LOGIN'] = 'reroute'
 # app.config['CAS_AFTER_LOGOUT'] = 'http://localhost:5000/relogout'
 app.config['CAS_AFTER_LOGOUT'] = 'https://defstruct.herokuapp.com/relogout'
 app.config['CAS_LOGIN_ROUTE'] = '/cas'
-
-# app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['DATABASE_URL']
-
 #-----------------------------------------------------------------------
 
 @app.route('/')
